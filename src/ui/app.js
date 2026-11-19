@@ -8,9 +8,9 @@ import { store } from '../core/state.js';
 import { fetchGitHubPublicData } from '../core/github.js';
 import { initTheme } from './theme.js';
 import { PreviewController } from './preview.js';
-import { ModuleListComponent } from './components/module-list.js?v=1.0.1';
-import { ModuleEditorComponent } from './components/module-editor.js?v=1.0.1';
-import { PublishModalComponent } from './components/publish-modal.js?v=1.0.1';
+import { ModuleListComponent } from './components/module-list.js?v=1.0.2';
+import { ModuleEditorComponent } from './components/module-editor.js?v=1.0.2';
+import { PublishModalComponent } from './components/publish-modal.js?v=1.0.2';
 import { QualityBarComponent } from './components/quality-bar.js';
 
 // Pre-load template definitions

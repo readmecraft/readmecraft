@@ -6,6 +6,7 @@
 
 import { generateTextBanner, processImageToAscii, buildAnimatedAsciiSvg, CHARSETS } from '../../core/ascii.js';
 import { SKILLS_LIST, SKILL_CATEGORIES, findSkill } from '../../core/skills-catalog.js';
+import { SOCIAL_PLATFORMS, SOCIAL_CATEGORIES, findPlatform, formatProfileUrl } from '../../core/socials-catalog.js';
 
 export class ModuleEditorComponent {
   constructor(store) {
@@ -610,71 +611,241 @@ export class ModuleEditorComponent {
 
   renderSocialsForm(data) {
     const links = Array.isArray(data.links) ? [...data.links] : [];
+    const currentStyle = data.style || 'icons';
+
+    // Helper to find existing link for a platform
+    const getExisting = (platform) => {
+      return links.find(l => {
+        if (!l) return false;
+        if (l.id && l.id.toLowerCase() === platform.id.toLowerCase()) return true;
+        if (l.platform && l.platform.toLowerCase() === platform.name.toLowerCase()) return true;
+        return false;
+      });
+    };
+
+    // Calculate active count
+    const activeCount = links.filter(l => l && l.url && l.url.trim()).length;
 
     this.formContainer.innerHTML = `
       <div class="form-group">
-        <label class="form-label" for="social-style">Badge / Link Style</label>
-        <select id="social-style" class="form-select">
-          <option value="badges" ${data.style === 'badges' ? 'selected' : ''}>Shields Badges (Visual)</option>
-          <option value="simple_links" ${data.style === 'simple_links' ? 'selected' : ''}>Clean Bullet Links (Text)</option>
+        <label class="form-label" for="social-style">Display Format</label>
+        <select id="social-style" name="social-style" class="form-select">
+          <option value="icons" ${currentStyle === 'icons' ? 'selected' : ''}>Vector Icons (Original Brand Logos)</option>
+          <option value="badges" ${currentStyle === 'badges' ? 'selected' : ''}>Shields Badges (Color Themed)</option>
+          <option value="simple_links" ${currentStyle === 'simple_links' ? 'selected' : ''}>Plain Bullet List (Minimalist)</option>
         </select>
       </div>
 
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-2);">
-        <span class="form-label">Active Social Links (${links.length})</span>
-        <button type="button" id="btn-add-social" class="btn btn--sm">+ Add Link</button>
+      <!-- Interactive Social Platform Picker -->
+      <div class="social-picker-container">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);">
+          <div style="display: flex; align-items: baseline; gap: var(--space-2);">
+            <strong style="font-size: var(--font-size-sm);">Social & Developer Profiles</strong>
+            <span class="brand-tag" id="social-count-badge">${activeCount} active</span>
+          </div>
+          <button type="button" id="btn-clear-all-socials" class="btn btn--sm btn--subtle" title="Clear all social links">Clear all</button>
+        </div>
+
+        <div class="skill-filter-bar">
+          <input type="text" id="social-search-input" name="social-search-input" class="form-input" style="padding: 4px 8px; font-size: 12px;" placeholder="Filter profiles... (e.g. Twitter, LeetCode, YouTube, LinkedIn)" autocomplete="off">
+        </div>
+
+        <div class="skill-category-chips" id="social-category-filters">
+          ${SOCIAL_CATEGORIES.map(cat => `
+            <button type="button" class="skill-cat-chip ${cat.id === 'all' ? 'active' : ''}" data-cat="${cat.id}">${cat.label}</button>
+          `).join('')}
+        </div>
+
+        <div class="social-platform-grid" id="social-platform-grid">
+          ${SOCIAL_PLATFORMS.map(p => {
+            const existing = getExisting(p);
+            const val = existing ? (existing.rawUsername || existing.url || '') : '';
+            const hasVal = Boolean(existing && existing.url && existing.url.trim());
+            return `
+              <div class="social-platform-card ${hasVal ? 'has-value' : ''}" data-id="${p.id}" data-category="${p.category}" data-name="${p.name.toLowerCase()}">
+                <span class="social-active-dot" title="${hasVal ? 'Active in README' : 'Inactive'}"></span>
+                <img src="${p.icon}" alt="" class="social-platform-icon" loading="lazy" aria-hidden="true">
+                <div class="social-platform-info">
+                  <span class="social-platform-name">${p.name}</span>
+                  <span class="social-platform-prefix" title="${p.prefix}">${p.prefix}</span>
+                </div>
+                <div class="social-platform-input-wrap">
+                  <input type="text"
+                         id="social-input-${p.id}"
+                         name="social-input-${p.id}"
+                         class="form-input social-platform-input"
+                         data-id="${p.id}"
+                         placeholder="${p.placeholder}"
+                         aria-label="${p.name} username or link"
+                         value="${val}">
+                  ${hasVal ? `<button type="button" class="btn btn--icon-sm btn--subtle btn-clear-social-item" data-id="${p.id}" title="Clear ${p.name}" aria-label="Clear ${p.name}">×</button>` : ''}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
       </div>
 
-      <div id="social-list-editor" style="display: flex; flex-direction: column; gap: var(--space-2);">
-        ${links.map((link, idx) => `
-          <div style="display: flex; gap: var(--space-2); align-items: center;">
-            <select id="social-platform-${idx}" name="social-platform-${idx}" class="form-select social-platform" data-idx="${idx}" style="width: 140px;" aria-label="Social platform #${idx + 1}">
-              <option value="Website" ${link.platform === 'Website' ? 'selected' : ''}>Website</option>
-              <option value="LinkedIn" ${link.platform === 'LinkedIn' ? 'selected' : ''}>LinkedIn</option>
-              <option value="Twitter" ${link.platform === 'Twitter' ? 'selected' : ''}>Twitter / X</option>
-              <option value="Bluesky" ${link.platform === 'Bluesky' ? 'selected' : ''}>Bluesky</option>
-              <option value="Mastodon" ${link.platform === 'Mastodon' ? 'selected' : ''}>Mastodon</option>
-              <option value="YouTube" ${link.platform === 'YouTube' ? 'selected' : ''}>YouTube</option>
-              <option value="Substack" ${link.platform === 'Substack' ? 'selected' : ''}>Substack</option>
-            </select>
-            <input type="url" id="social-url-${idx}" name="social-url-${idx}" class="form-input social-url" data-idx="${idx}" placeholder="https://..." aria-label="Profile link URL #${idx + 1}" value="${link.url || ''}" style="flex: 1;">
-            <button type="button" class="btn btn--icon-sm btn--danger btn-remove-social" data-idx="${idx}" title="Remove link" aria-label="Remove link #${idx + 1}">×</button>
-          </div>
-        `).join('')}
+      <!-- Custom Links Section -->
+      <div style="margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border-muted);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-2);">
+          <span class="form-label" style="margin-bottom: 0;">Custom & Additional Links</span>
+          <button type="button" id="btn-add-custom-social" class="btn btn--sm">+ Add Custom Link</button>
+        </div>
+
+        <div id="custom-social-list" style="display: flex; flex-direction: column; gap: var(--space-2);">
+          ${links.filter(l => l && !getExisting({ id: l.id || '', name: l.platform || '' })).map((l, idx) => `
+            <div style="display: flex; gap: var(--space-2); align-items: center;">
+              <input type="text" id="custom-social-label-${idx}" name="custom-social-label-${idx}" class="form-input custom-social-label" data-idx="${idx}" placeholder="Label (e.g. Blog)" value="${l.label || l.platform || ''}" style="width: 130px;" aria-label="Custom link label #${idx + 1}">
+              <input type="url" id="custom-social-url-${idx}" name="custom-social-url-${idx}" class="form-input custom-social-url" data-idx="${idx}" placeholder="https://..." value="${l.url || ''}" style="flex: 1;" aria-label="Custom link URL #${idx + 1}">
+              <button type="button" class="btn btn--icon-sm btn--danger btn-remove-custom-social" data-idx="${idx}" title="Remove custom link" aria-label="Remove custom link #${idx + 1}">×</button>
+            </div>
+          `).join('')}
+        </div>
       </div>
     `;
 
-    document.getElementById('social-style').addEventListener('change', (e) => this.updateData({ style: e.target.value }));
+    // 1. Format style change
+    document.getElementById('social-style')?.addEventListener('change', (e) => {
+      this.updateData({ style: e.target.value });
+    });
 
-    document.getElementById('btn-add-social').addEventListener('click', () => {
-      links.push({ platform: 'Website', url: '', label: 'Portfolio' });
+    // 2. Search filter
+    const searchInput = document.getElementById('social-search-input');
+    const cards = Array.from(this.formContainer.querySelectorAll('.social-platform-card'));
+
+    let currentCategory = 'all';
+
+    const filterCards = () => {
+      const q = (searchInput?.value || '').toLowerCase().trim();
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        const name = card.getAttribute('data-name');
+        const matchesCat = currentCategory === 'all' || cat === currentCategory;
+        const matchesQuery = !q || name.includes(q) || cat.includes(q);
+        card.style.display = (matchesCat && matchesQuery) ? 'flex' : 'none';
+      });
+    };
+
+    searchInput?.addEventListener('input', filterCards);
+
+    // 3. Category filters
+    this.formContainer.querySelectorAll('#social-category-filters .skill-cat-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        this.formContainer.querySelectorAll('#social-category-filters .skill-cat-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentCategory = chip.getAttribute('data-cat') || 'all';
+        filterCards();
+      });
+    });
+
+    // 4. Handle Platform input changes
+    const countBadge = document.getElementById('social-count-badge');
+
+    const updateSocialData = () => {
+      const updatedLinks = [];
+
+      // Add catalog platforms with values
+      SOCIAL_PLATFORMS.forEach(p => {
+        const input = document.getElementById(`social-input-${p.id}`);
+        const raw = input?.value.trim() || '';
+        const card = input?.closest('.social-platform-card');
+
+        if (raw) {
+          const fullUrl = formatProfileUrl(p, raw);
+          updatedLinks.push({
+            id: p.id,
+            platform: p.name,
+            label: p.name,
+            rawUsername: raw,
+            url: fullUrl
+          });
+          card?.classList.add('has-value');
+        } else {
+          card?.classList.remove('has-value');
+        }
+      });
+
+      // Add custom links
+      this.formContainer.querySelectorAll('#custom-social-list > div').forEach(row => {
+        const labelInput = row.querySelector('.custom-social-label');
+        const urlInput = row.querySelector('.custom-social-url');
+        const label = labelInput?.value.trim() || 'Link';
+        const url = urlInput?.value.trim() || '';
+        if (url) {
+          updatedLinks.push({
+            id: `custom_${label.toLowerCase().replace(/[^a-z0-9]/g, '_')}`,
+            platform: label,
+            label,
+            rawUsername: url,
+            url
+          });
+        }
+      });
+
+      const total = updatedLinks.length;
+      if (countBadge) countBadge.textContent = `${total} active`;
+
+      this.updateData({ links: updatedLinks });
+    };
+
+    // Bind inputs
+    this.formContainer.querySelectorAll('.social-platform-input').forEach(input => {
+      input.addEventListener('input', () => {
+        updateSocialData();
+      });
+    });
+
+    // Clear single platform item
+    this.formContainer.querySelectorAll('.btn-clear-social-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        const input = document.getElementById(`social-input-${id}`);
+        if (input) {
+          input.value = '';
+          updateSocialData();
+          btn.remove();
+        }
+      });
+    });
+
+    // 5. Clear all social links
+    document.getElementById('btn-clear-all-socials')?.addEventListener('click', () => {
+      this.formContainer.querySelectorAll('.social-platform-input').forEach(input => {
+        input.value = '';
+      });
+      cards.forEach(card => card.classList.remove('has-value'));
+      if (countBadge) countBadge.textContent = '0 active';
+      this.updateData({ links: [] });
+      this.render(this.store.getState());
+    });
+
+    // 6. Custom links handlers
+    document.getElementById('btn-add-custom-social')?.addEventListener('click', () => {
+      links.push({ id: `custom_${Date.now()}`, platform: 'Website', label: 'Website', url: 'https://' });
       this.updateData({ links });
       this.render(this.store.getState());
     });
 
-    this.formContainer.querySelectorAll('.btn-remove-social').forEach(btn => {
+    this.formContainer.querySelectorAll('.btn-remove-custom-social').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const idx = parseInt(e.target.getAttribute('data-idx'), 10);
-        links.splice(idx, 1);
-        this.updateData({ links });
-        this.render(this.store.getState());
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        // Find custom links in links array
+        const customItems = links.filter(l => l && !getExisting({ id: l.id || '', name: l.platform || '' }));
+        if (customItems[idx]) {
+          const actualIndex = links.indexOf(customItems[idx]);
+          if (actualIndex >= 0) {
+            links.splice(actualIndex, 1);
+            this.updateData({ links });
+            this.render(this.store.getState());
+          }
+        }
       });
     });
 
-    this.formContainer.querySelectorAll('.social-platform').forEach(sel => {
-      sel.addEventListener('change', (e) => {
-        const idx = parseInt(e.target.getAttribute('data-idx'), 10);
-        links[idx].platform = e.target.value;
-        links[idx].label = e.target.value;
-        this.updateData({ links });
-      });
-    });
-
-    this.formContainer.querySelectorAll('.social-url').forEach(input => {
-      input.addEventListener('input', (e) => {
-        const idx = parseInt(e.target.getAttribute('data-idx'), 10);
-        links[idx].url = e.target.value;
-        this.updateData({ links });
+    this.formContainer.querySelectorAll('.custom-social-label, .custom-social-url').forEach(input => {
+      input.addEventListener('input', () => {
+        updateSocialData();
       });
     });
   }

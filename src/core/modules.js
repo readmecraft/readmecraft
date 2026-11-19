@@ -110,15 +110,15 @@ export const MODULE_DEFINITIONS = [
     id: 'socials',
     title: 'Social & Web Links',
     category: 'contact',
-    description: 'Links to personal site, LinkedIn, Bluesky, Twitter/X, and communities.',
+    description: 'Connect with me across developer networks, social media, and portfolios.',
     defaultEnabled: true,
     defaultData: {
-      style: 'badges', // 'badges' | 'simple_links'
+      style: 'icons', // 'icons' | 'badges' | 'simple_links'
       links: [
-        { platform: 'Website', url: 'https://example.com', label: 'Portfolio' },
-        { platform: 'LinkedIn', url: 'https://linkedin.com', label: 'LinkedIn' },
-        { platform: 'Twitter', url: 'https://x.com', label: 'X / Twitter' },
-        { platform: 'Bluesky', url: '', label: 'Bluesky' }
+        { platform: 'Twitter', url: 'https://x.com/', label: 'Twitter / X' },
+        { platform: 'LinkedIn', url: 'https://linkedin.com/in/', label: 'LinkedIn' },
+        { platform: 'LeetCode', url: 'https://leetcode.com/u/', label: 'LeetCode' },
+        { platform: 'Website', url: 'https://example.com', label: 'Portfolio' }
       ]
     }
   },

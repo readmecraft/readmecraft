@@ -5,6 +5,7 @@
  */
 
 import { findSkill } from './skills-catalog.js';
+import { findPlatform } from './socials-catalog.js';
 
 /**
  * Escapes characters that could break markdown formatting where plain text is expected
@@ -291,19 +292,36 @@ function renderSocials(data) {
   if (links.length === 0) return '';
 
   const lines = ['## Connect with Me', ''];
+  const style = data.style || 'icons';
 
-  if (data.style === 'badges') {
-    const badges = links.map(link => {
-      const platform = escapeText(link.platform) || 'Link';
+  if (style === 'icons') {
+    // Vector brand icons matching rahuldkjain's layout with clean align and proper dimensions
+    const iconLinks = links.map(link => {
+      const p = findPlatform(link.platform || link.id || link.label);
+      const label = escapeText(link.label || link.name || p?.name || 'Social Profile');
       const url = escapeText(link.url);
-      const label = escapeText(link.label) || platform;
-      const logo = platform.toLowerCase().replace(/\s+/g, '');
-      return `[![${label}](https://img.shields.io/badge/${encodeURIComponent(platform)}-000000?style=for-the-badge&logo=${logo}&logoColor=white)](${url})`;
+      const iconUrl = p?.icon || 'https://raw.githubusercontent.com/devicons/devicon/master/icons/devicon/devicon-original.svg';
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer"><img align="center" src="${iconUrl}" alt="${label}" height="32" width="32" /></a>`;
+    });
+    lines.push('<p align="left">');
+    lines.push(iconLinks.join(' '));
+    lines.push('</p>');
+  } else if (style === 'badges') {
+    const badges = links.map(link => {
+      const p = findPlatform(link.platform || link.id || link.label);
+      const platform = escapeText(p?.name || link.platform || 'Link');
+      const url = escapeText(link.url);
+      const label = escapeText(link.label || platform);
+      const color = p?.color || '000000';
+      const logo = (p?.id === 'twitter' ? 'x' : (p?.id || platform.toLowerCase().replace(/[^a-z0-9]/g, '')));
+      return `[![${label}](https://img.shields.io/badge/${encodeURIComponent(platform)}-${color}?style=for-the-badge&logo=${encodeURIComponent(logo)}&logoColor=white)](${url})`;
     });
     lines.push(badges.join(' '));
   } else {
+    // Plain bullet list
     for (const link of links) {
-      const label = escapeText(link.label) || escapeText(link.platform) || 'Website';
+      const p = findPlatform(link.platform || link.id || link.label);
+      const label = escapeText(link.label || p?.name || link.platform || 'Website');
       const url = escapeText(link.url);
       lines.push(`- [${label}](${url})`);
     }

@@ -3,28 +3,28 @@
 > ReadmeCraft is a free, open-source, browser-based GitHub Profile README Builder and Generator. It allows software engineers, developers, and open-source creators to design, preview, and publish customized GitHub profile READMEs in real time with zero server storage.
 
 ## Core Capabilities
-- **Live GitHub Simulation**: Side-by-side split screen preview supporting official GitHub Dark (`#0d1117`) and Light (`#ffffff`) color palettes, plus a 375px mobile viewport toggle.
-- **65+ Tech Stack Badges**: Searchable icons across Languages, Frontend, Backend, Databases, Cloud & DevOps, and Tools. Supports Shields.io badges, Devicons vector logos, and minimal markdown bullet points.
-- **23+ Social & Coding Profiles**: Badges with authentic brand colors and vector SVG logos for GitHub, LinkedIn, Twitter/X, LeetCode, Codeforces, HackerRank, YouTube, Dev.to, Medium, Discord, Buy Me a Coffee, and more.
-- **Dynamic Stats Integration**: Live stats cards, streak stats counters, and top languages graphs via GitHub Readme Stats and GitHub Readme Streak Stats.
-- **ASCII Art Banners**: Monospace ASCII text banner generator and image-to-ASCII converter with customizable character sets and width constraints.
-- **1-Click GitHub Publishing**: Directly commits the generated `README.md` to the user's special `username/username` repository via the GitHub REST API.
-- **100% Client-Side Privacy**: Runs completely in the browser. Personal Access Tokens are held exclusively in volatile RAM and purged immediately after execution. Fully compliant with India's DPDP Act 2023 and GDPR.
 
-## URLs & Resources
-- **Homepage**: https://readmecraft.github.io/
-- **Interactive Editor**: https://readmecraft.github.io/editor.html
-- **Full Documentation & LLM Guide**: https://readmecraft.github.io/llms-full.txt
-- **Sitemap**: https://readmecraft.github.io/sitemap.xml
-- **Privacy Policy**: https://readmecraft.github.io/privacy.html
-- **Terms of Service**: https://readmecraft.github.io/terms.html
-- **Cookie Policy**: https://readmecraft.github.io/cookies.html
-- **Source Code**: https://github.com/readmecraft/readmecraft.github.io
+- [Live GitHub Simulation](https://readmecraft.github.io/#features): Side-by-side split screen preview supporting official GitHub Dark (#0d1117) and Light (#ffffff) color palettes, plus a 375px mobile viewport toggle.
+- [65+ Tech Stack Badges](https://readmecraft.github.io/#skills): Searchable icons across Languages, Frontend, Backend, Databases, Cloud & DevOps, and Tools. Supports Shields.io badges, Devicons vector logos, and minimal markdown bullet points.
+- [23+ Social & Coding Profiles](https://readmecraft.github.io/#features): Badges with authentic brand colors and vector SVG logos for GitHub, LinkedIn, Twitter/X, LeetCode, Codeforces, HackerRank, YouTube, Dev.to, Medium, Discord, Buy Me a Coffee, and more.
+- [Dynamic Stats Integration](https://readmecraft.github.io/#features): Live stats cards, streak stats counters, and top languages graphs via GitHub Readme Stats and GitHub Readme Streak Stats.
+- [ASCII Art Banners](https://readmecraft.github.io/#features): Monospace ASCII text banner generator and image-to-ASCII converter with customizable character sets and width constraints.
+- [1-Click GitHub Publishing](https://readmecraft.github.io/#features): Directly commits the generated README.md to the user's special username/username repository via the GitHub REST API.
+- [100% Client-Side Privacy](https://readmecraft.github.io/#privacy): Runs completely in the browser. Personal Access Tokens are held exclusively in volatile RAM and purged immediately after execution. Fully compliant with India's DPDP Act 2023 and GDPR.
+
+## Documentation & URLs
+
+- [ReadmeCraft Homepage](https://readmecraft.github.io/): Main web application and documentation portal.
+- [Interactive Editor](https://readmecraft.github.io/editor.html): Live README editor with real-time preview and export tools.
+- [Full LLM Specification](https://readmecraft.github.io/llms-full.txt): Comprehensive technical details and schema reference for AI agents.
+- [XML Sitemap](https://readmecraft.github.io/sitemap.xml): Machine-readable index of all website URLs and canonical locations.
+- [Privacy Policy](https://readmecraft.github.io/privacy.html): DPDP and GDPR compliant data processing and privacy terms.
+- [Terms of Service](https://readmecraft.github.io/terms.html): Open-source MIT usage terms and client-side operating conditions.
+- [Cookie Policy](https://readmecraft.github.io/cookies.html): Notice of zero persistent tracking cookies and client-side state.
+- [Source Code Repository](https://github.com/readmecraft/readmecraft.github.io): GitHub repository holding the complete open-source codebase.
 
 ## Quickstart Guide
-1. Go to `https://readmecraft.github.io/editor.html` (or enter your GitHub username on the landing page).
-2. Choose from 5 role-tailored templates: Minimal, Developer, Open Source, Freelancer, or Creator.
-3. Toggle modules (About Me, Tech Stack, Socials, Dynamic Stats, ASCII Banners, Projects, Custom Markdown).
-4. Select tech badges and enter profile handles.
-5. Review the real-time GitHub Dark/Light preview.
-6. Click "Publish to GitHub" or copy the formatted Markdown.
+
+- [Launch Editor](https://readmecraft.github.io/editor.html): Open the online builder directly.
+- [Choose a Role Template](https://readmecraft.github.io/#templates): Select from Minimal, Developer, Open Source, Freelancer, or Creator templates.
+- [Review Developer Playbook](https://readmecraft.github.io/#guide): Senior engineer best practices for building an impactful profile.

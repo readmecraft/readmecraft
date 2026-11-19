@@ -31,4 +31,4 @@ Allow: /
 
 # Sitemaps and AI Specifications
 Sitemap: https://readmecraft.github.io/sitemap.xml
-LLM-Reference: https://readmecraft.github.io/llms.txt
+# LLM-Reference: https://readmecraft.github.io/llms.txt

@@ -45,13 +45,14 @@
 }
 
 .btn--primary {
-  background-color: var(--color-accent);
+  background-color: #1f6feb;
   color: #ffffff;
+  font-weight: 600;
   border-color: rgba(27, 31, 36, 0.15);
 }
 
 .btn--primary:hover:not(:disabled) {
-  background-color: var(--color-accent-hover);
+  background-color: #1a5fd0;
   border-color: rgba(27, 31, 36, 0.2);
   color: #ffffff;
 }
@@ -113,8 +114,12 @@
 
 .btn-group .btn.active {
   background-color: var(--color-bg-active);
-  color: var(--color-accent);
+  color: #58a6ff;
   font-weight: var(--font-weight-semibold);
+}
+
+[data-theme="light"] .btn-group .btn.active {
+  color: #0969da;
 }
 
 /* Header dropdown & export styles */
@@ -602,13 +607,17 @@
 }
 
 .module-move-btn {
-  color: var(--color-text-muted);
-  padding: 2px;
+  color: var(--color-text-secondary);
+  padding: 4px;
   font-size: var(--font-size-2xs);
   border-radius: var(--radius-xs);
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  width: 24px;
+  height: 24px;
   background: none;
   border: none;
   cursor: pointer;
@@ -662,7 +671,7 @@
 .quality-badge--high {
   background-color: var(--color-success-subtle);
   border-color: var(--color-success-border);
-  color: var(--color-success);
+  color: #3fb950;
 }
 
 .quality-badge--medium {

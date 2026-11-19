@@ -15,7 +15,7 @@ Currently developing high-throughput telemetry pipelines and open-source develop
 
 ---
 
-### Tech Stack
+## Tech Stack
 
 <p align="left">
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="32" height="32"/>
@@ -27,14 +27,14 @@ Currently developing high-throughput telemetry pipelines and open-source develop
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="32" height="32"/>
 </p>
 
-### Featured Projects
+## Featured Projects
 
 | Repository | Description | Tech |
 | :--- | :--- | :--- |
 | **hyper-fetch** | Ultra-lightweight HTTP client with automatic retries and zero dependencies. | TypeScript |
 | **cli-toolkit** | Composable terminal utilities for high-throughput pipeline workflows. | Go |
 
-### Connect with Me
+## Connect with Me
 
 <p align="left">
   <a href="https://github.com" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="GitHub" width="28" height="28"/></a>

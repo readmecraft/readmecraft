@@ -5,12 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob: https://c.clarity.ms; connect-src 'self' https://api.github.com https://*.clarity.ms blob:; worker-src 'self' blob:; media-src 'self' blob:; font-src 'self';">
 
-  <!-- Microsoft Clarity -->
+  <!-- Microsoft Clarity (Performance & Cookieless Optimized) -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        c[a]('consent', false);
+        function initClarity() {
+          if (c.__clarityLoaded) return;
+          c.__clarityLoaded = true;
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        }
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function() { setTimeout(initClarity, 4000); });
+        } else {
+          setTimeout(initClarity, 4000);
+        }
+        ['pointerdown', 'keydown', 'scroll'].forEach(function(evt) {
+          window.addEventListener(evt, initClarity, { once: true, passive: true });
+        });
     })(window, document, "clarity", "script", "zfzkhpvnlq");
   </script>
 
@@ -261,6 +274,7 @@
 
   <link rel="icon" type="image/png" href="assets/favicon_dark.png" id="app-favicon">
   <link rel="alternate icon" type="image/png" href="assets/favicon_light.png">
+  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="src/styles/tokens.css?v=1.2.1">
@@ -269,9 +283,9 @@
   <link rel="stylesheet" href="src/styles/components.css?v=1.2.1">
   <link rel="stylesheet" href="src/styles/animations.css?v=1.2.1">
 
-  <!-- Vendored Libraries (Pinned) -->
-  <script src="vendor/marked-15.0.7.min.js"></script>
-  <script src="vendor/dompurify-3.2.4.min.js"></script>
+  <!-- Vendored Libraries (Deferred for non-blocking rendering) -->
+  <script src="vendor/marked-15.0.7.min.js" defer></script>
+  <script src="vendor/dompurify-3.2.4.min.js" defer></script>
 </head>
 <body>
   <div class="landing-page" id="app">
@@ -282,10 +296,10 @@
 
     <!-- Slim Navigation Bar -->
     <header class="app-header" role="banner">
-      <a href="index.html" class="header-brand" aria-label="ReadmeCraft Home">
-        <img src="assets/horizontal_lockup_white.png" alt="ReadmeCraft" class="brand-logo brand-logo--light" height="26">
-        <img src="assets/horizontal_lockup_dark.png" alt="ReadmeCraft" class="brand-logo brand-logo--dark" height="26">
-        <span class="brand-tag">v1</span>
+      <a href="index.html" class="header-brand" aria-label="ReadmeCraft v1 Home">
+        <img src="assets/horizontal_lockup_white.png" alt="ReadmeCraft" class="brand-logo brand-logo--light" width="83" height="26">
+        <img src="assets/horizontal_lockup_dark.png" alt="ReadmeCraft" class="brand-logo brand-logo--dark" width="97" height="26">
+        <span class="brand-tag" aria-hidden="true">v1</span>
       </a>
 
       <nav class="landing-nav-links" aria-label="Main Navigation">
@@ -383,7 +397,48 @@
 
         <div style="padding: var(--space-6);" id="landing-preview-container" class="preview-dark">
           <article id="landing-preview-body" class="markdown-body">
-            <!-- Rendered via src/ui/landing.js -->
+            <h1>Alex Rivera</h1>
+            <p><strong>Full-Stack &amp; Systems Engineer</strong> • Building resilient distributed architectures.<br>Currently developing high-throughput telemetry pipelines and open-source developer tooling.</p>
+            <hr>
+            <h2>Tech Stack</h2>
+            <p align="left">
+              <img height="32" width="32" alt="TypeScript" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg">
+              <img height="32" width="32" alt="React" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg">
+              <img height="32" width="32" alt="Next.js" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nextjs/nextjs-original.svg">
+              <img height="32" width="32" alt="Go" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg">
+              <img height="32" width="32" alt="Rust" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/rust/rust-original.svg">
+              <img height="32" width="32" alt="PostgreSQL" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg">
+              <img height="32" width="32" alt="Docker" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg">
+            </p>
+            <h2>Featured Projects</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th align="left">Repository</th>
+                  <th align="left">Description</th>
+                  <th align="left">Tech</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td align="left"><strong>hyper-fetch</strong></td>
+                  <td align="left">Ultra-lightweight HTTP client with automatic retries and zero dependencies.</td>
+                  <td align="left">TypeScript</td>
+                </tr>
+                <tr>
+                  <td align="left"><strong>cli-toolkit</strong></td>
+                  <td align="left">Composable terminal utilities for high-throughput pipeline workflows.</td>
+                  <td align="left">Go</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Connect with Me</h2>
+            <p align="left">
+              <a rel="noopener noreferrer" href="https://github.com"><img height="28" width="28" alt="GitHub" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg"></a>
+              <a rel="noopener noreferrer" href="https://linkedin.com"><img height="28" width="28" alt="LinkedIn" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg"></a>
+              <a rel="noopener noreferrer" href="https://x.com"><img height="28" width="28" alt="Twitter" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg"></a>
+              <a rel="noopener noreferrer" href="https://leetcode.com"><img height="28" width="28" alt="LeetCode" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg"></a>
+            </p>
           </article>
           <textarea id="landing-raw-textarea" class="markdown-source-view" readonly style="display: none; height: 320px;"></textarea>
         </div>

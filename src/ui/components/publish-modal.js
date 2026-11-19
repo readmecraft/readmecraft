@@ -18,6 +18,7 @@ export class PublishModalComponent {
     this.commitMsgInput = document.getElementById('publish-commit-msg');
     this.statusBox = document.getElementById('publish-status-box');
     this.repoTarget = document.getElementById('publish-repo-target');
+    this.form = document.getElementById('publish-form');
 
     this.init();
   }
@@ -26,6 +27,12 @@ export class PublishModalComponent {
     this.openBtn?.addEventListener('click', () => this.open());
     this.closeBtn?.addEventListener('click', () => this.close());
     this.cancelBtn?.addEventListener('click', () => this.close());
+
+    // Prevent default form submission and trigger publish
+    this.form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.handlePublish();
+    });
 
     // Click outside dialog to close
     this.backdrop?.addEventListener('click', (e) => {

@@ -81,7 +81,14 @@ export class PreviewController {
    * Performs the actual HTML compilation and DOM update
    */
   render(state) {
-    const { markdown, previewTheme, previewWidth, previewTab } = state;
+    const { markdown, previewTheme, previewWidth, previewTab, githubUsername } = state;
+
+    // Update simulated repository title
+    const chromeRepoEl = document.getElementById('preview-chrome-repo');
+    if (chromeRepoEl) {
+      const u = githubUsername || 'username';
+      chromeRepoEl.textContent = `${u} / README.md`;
+    }
 
     // Apply GitHub dark/light mode class
     if (this.previewContainer) {

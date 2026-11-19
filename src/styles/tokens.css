@@ -1,59 +1,68 @@
 /**
- * Design Tokens for ReadmeCraft
- * Restrained palette: Neutral greys + single blue accent.
- * 4/8px spacing scale, small radii, system typography, accessible contrasts.
+ * ReadmeCraft — Design Tokens
+ * Grounded in developer tooling aesthetics: authentic GitHub neutral palette,
+ * 4/8px spatial rhythm, system + monospace typography, and restrained accents.
  */
 
 :root {
-  /* Colors - Light Theme Default */
-  --color-bg-canvas: #ffffff;
-  --color-bg-surface: #f6f8fa;
-  --color-bg-subtle: #f3f4f6;
-  --color-bg-inset: #eaeef2;
-  --color-bg-hover: #f0f2f5;
-  --color-bg-active: #e4e7eb;
+  /* Surface & Canvas (Light Mode) */
+  --color-bg-canvas: #f6f8fa;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f6f8fa;
+  --color-bg-inset: #f1f3f5;
+  --color-bg-hover: #f3f4f6;
+  --color-bg-active: #ebedf0;
 
+  /* Borders & Dividers */
   --color-border-default: #d0d7de;
   --color-border-muted: #e1e4e8;
   --color-border-subtle: rgba(27, 31, 36, 0.08);
 
+  /* Typography Colors */
   --color-text-primary: #1f2328;
   --color-text-secondary: #59636e;
-  --color-text-muted: #656d76;
+  --color-text-muted: #8c959f;
   --color-text-inverse: #ffffff;
 
+  /* Accent & Interactive (GitHub Royal Blue) */
   --color-accent: #0969da;
   --color-accent-hover: #0856b3;
   --color-accent-subtle: #ddf4ff;
   --color-accent-fg: #0969da;
 
+  /* Status Colors */
   --color-success: #1a7f37;
   --color-success-subtle: #dafbe1;
+  --color-success-border: #4ac26b;
   --color-warning: #9a6700;
   --color-warning-subtle: #fff8c5;
+  --color-warning-border: #d4a72c;
   --color-danger: #cf222e;
   --color-danger-subtle: #ffebe9;
+  --color-danger-border: #ff8182;
 
   --color-focus-ring: #0969da;
 
-  /* GitHub Preview Specific Colors */
+  /* GitHub Profile Preview Tokens (Light) */
   --gh-preview-bg: #ffffff;
   --gh-preview-border: #d0d7de;
   --gh-preview-text: #1f2328;
   --gh-preview-code-bg: #f6f8fa;
+  --gh-preview-blockquote: #59636e;
   --gh-preview-blockquote-border: #d0d7de;
 
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  /* Typography Stack */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.8125rem;  /* 13px */
-  --font-size-base: 0.875rem; /* 14px */
-  --font-size-md: 1rem;       /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-2xs: 0.6875rem; /* 11px */
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.8125rem;   /* 13px */
+  --font-size-base: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;        /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.375rem;    /* 22px */
+  --font-size-2xl: 1.75rem;    /* 28px */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -76,100 +85,121 @@
   --space-10: 40px;
   --space-12: 48px;
 
-  /* Radii */
-  --radius-sm: 4px;
+  /* Radii (Small, crisp, geometric) */
+  --radius-xs: 3px;
+  --radius-sm: 5px;
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(27, 31, 36, 0.06);
-  --shadow-md: 0 3px 6px rgba(140, 149, 159, 0.15);
-  --shadow-lg: 0 8px 24px rgba(140, 149, 159, 0.2);
+  /* Shadows (Restrained hairline elevation) */
+  --shadow-sm: 0 1px 2px rgba(27, 31, 36, 0.04);
+  --shadow-md: 0 3px 6px rgba(140, 149, 159, 0.12);
+  --shadow-lg: 0 8px 24px rgba(140, 149, 159, 0.16);
 
   /* Transitions */
   --duration-fast: 120ms;
   --duration-normal: 180ms;
   --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Layout dimensions */
-  --header-height: 54px;
+  /* Layout Dimensions */
+  --header-height: 48px;
   --sidebar-width: 270px;
   --mobile-tab-height: 52px;
 }
 
-/* Dark Theme Tokens */
+/* Dark Theme Tokens (Default developer setting) */
 [data-theme="dark"] {
-  --color-bg-canvas: #0d1117;
-  --color-bg-surface: #161b22;
-  --color-bg-subtle: #21262d;
+  --color-bg-canvas: #090d13;
+  --color-bg-surface: #0d1117;
+  --color-bg-subtle: #161b22;
   --color-bg-inset: #010409;
-  --color-bg-hover: #30363d;
-  --color-bg-active: #3c444d;
+  --color-bg-hover: #1c2129;
+  --color-bg-active: #262c36;
 
   --color-border-default: #30363d;
   --color-border-muted: #21262d;
-  --color-border-subtle: rgba(240, 246, 252, 0.1);
+  --color-border-subtle: rgba(240, 246, 252, 0.08);
 
   --color-text-primary: #e6edf3;
   --color-text-secondary: #8b949e;
-  --color-text-muted: #7d8590;
+  --color-text-muted: #6e7681;
   --color-text-inverse: #0d1117;
 
   --color-accent: #2f81f7;
   --color-accent-hover: #58a6ff;
-  --color-accent-subtle: rgba(56, 139, 253, 0.15);
+  --color-accent-subtle: rgba(56, 139, 253, 0.12);
   --color-accent-fg: #58a6ff;
 
   --color-success: #238636;
-  --color-success-subtle: rgba(46, 160, 67, 0.15);
-  --color-warning: #9e6a03;
-  --color-warning-subtle: rgba(187, 128, 9, 0.15);
+  --color-success-subtle: rgba(46, 160, 67, 0.12);
+  --color-success-border: #3fb950;
+  --color-warning: #bb8009;
+  --color-warning-subtle: rgba(187, 128, 9, 0.12);
+  --color-warning-border: #d29922;
   --color-danger: #f85149;
-  --color-danger-subtle: rgba(248, 81, 73, 0.15);
+  --color-danger-subtle: rgba(248, 81, 73, 0.12);
+  --color-danger-border: #f85149;
 
   --color-focus-ring: #2f81f7;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.55);
+  /* GitHub Profile Preview Tokens (Dark) */
+  --gh-preview-bg: #0d1117;
+  --gh-preview-border: #30363d;
+  --gh-preview-text: #e6edf3;
+  --gh-preview-code-bg: #161b22;
+  --gh-preview-blockquote: #8b949e;
+  --gh-preview-blockquote-border: #30363d;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.6);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg-canvas: #0d1117;
-    --color-bg-surface: #161b22;
-    --color-bg-subtle: #21262d;
+    --color-bg-canvas: #090d13;
+    --color-bg-surface: #0d1117;
+    --color-bg-subtle: #161b22;
     --color-bg-inset: #010409;
-    --color-bg-hover: #30363d;
-    --color-bg-active: #3c444d;
+    --color-bg-hover: #1c2129;
+    --color-bg-active: #262c36;
 
     --color-border-default: #30363d;
     --color-border-muted: #21262d;
-    --color-border-subtle: rgba(240, 246, 252, 0.1);
+    --color-border-subtle: rgba(240, 246, 252, 0.08);
 
     --color-text-primary: #e6edf3;
     --color-text-secondary: #8b949e;
-    --color-text-muted: #7d8590;
+    --color-text-muted: #6e7681;
     --color-text-inverse: #0d1117;
 
     --color-accent: #2f81f7;
     --color-accent-hover: #58a6ff;
-    --color-accent-subtle: rgba(56, 139, 253, 0.15);
+    --color-accent-subtle: rgba(56, 139, 253, 0.12);
     --color-accent-fg: #58a6ff;
 
     --color-success: #238636;
-    --color-success-subtle: rgba(46, 160, 67, 0.15);
-    --color-warning: #9e6a03;
-    --color-warning-subtle: rgba(187, 128, 9, 0.15);
+    --color-success-subtle: rgba(46, 160, 67, 0.12);
+    --color-success-border: #3fb950;
+    --color-warning: #bb8009;
+    --color-warning-subtle: rgba(187, 128, 9, 0.12);
+    --color-warning-border: #d29922;
     --color-danger: #f85149;
-    --color-danger-subtle: rgba(248, 81, 73, 0.15);
+    --color-danger-subtle: rgba(248, 81, 73, 0.12);
+    --color-danger-border: #f85149;
 
     --color-focus-ring: #2f81f7;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.55);
+    --gh-preview-bg: #0d1117;
+    --gh-preview-border: #30363d;
+    --gh-preview-text: #e6edf3;
+    --gh-preview-code-bg: #161b22;
+    --gh-preview-blockquote: #8b949e;
+    --gh-preview-blockquote-border: #30363d;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.6);
   }
 }
-

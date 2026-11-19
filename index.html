@@ -4,8 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' https://api.github.com blob:; worker-src 'self' blob:; media-src 'self' blob:; font-src 'self';">
-  <title>ReadmeCraft — GitHub Profile README Builder</title>
-  <meta name="description" content="A free, browser-only tool to build and publish professional GitHub profile READMEs with live preview and template presets.">
+  <title>ReadmeCraft — Free GitHub Profile README Builder & Generator</title>
+  <meta name="description" content="Build a standout GitHub profile README in minutes. Live GitHub dark/light preview, 65+ tech skill icons, curated templates, and 1-click publishing to your GitHub profile repository.">
+  <meta name="keywords" content="github profile readme generator, github profile builder, github readme template, developer portfolio, markdown badges, devicons, open source profile">
+  <meta name="author" content="ReadmeCraft">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://readmecraft.github.io/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://readmecraft.github.io/">
+  <meta property="og:title" content="ReadmeCraft — Free GitHub Profile README Builder & Generator">
+  <meta property="og:description" content="Build a standout GitHub profile README in minutes. Live GitHub dark/light preview, 65+ tech skill icons, and 1-click publishing.">
+  <meta property="og:image" content="assets/horizontal_lockup_dark.png">
+  <meta property="og:site_name" content="ReadmeCraft">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ReadmeCraft — Free GitHub Profile README Builder">
+  <meta name="twitter:description" content="Build a standout GitHub profile README in minutes. Live GitHub preview, curated templates, and 1-click publishing.">
+  <meta name="twitter:image" content="assets/horizontal_lockup_dark.png">
+
   <link rel="icon" type="image/png" href="assets/favicon_dark.png" id="app-favicon">
   <link rel="alternate icon" type="image/png" href="assets/favicon_light.png">
 
@@ -23,11 +42,11 @@
   <div class="app-root" id="app">
     <!-- Slim Top App Bar -->
     <header class="app-header" role="banner">
-      <div class="header-brand">
+      <a href="index.html" class="header-brand" aria-label="ReadmeCraft Home">
         <img src="assets/horizontal_lockup_white.png" alt="ReadmeCraft" class="brand-logo brand-logo--light" height="26">
         <img src="assets/horizontal_lockup_dark.png" alt="ReadmeCraft" class="brand-logo brand-logo--dark" height="26">
         <span class="brand-tag">v1</span>
-      </div>
+      </a>
 
       <div class="header-controls" id="header-controls">
         <!-- Template & Preset Dropdown -->
@@ -101,8 +120,49 @@
           </svg>
           Publish
         </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="btn-mobile-menu" class="btn btn--icon btn--subtle btn-mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/>
+          </svg>
+        </button>
       </div>
     </header>
+
+    <!-- Mobile Navigation Drawer Dropdown -->
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer" role="dialog" aria-modal="false" aria-label="Mobile Navigation Menu">
+      <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+        <label for="mobile-template-select" style="font-size: var(--font-size-xs); color: var(--color-text-secondary); font-weight: 500;">
+          Select Template
+        </label>
+        <select id="mobile-template-select" class="form-select">
+          <option value="minimal">Minimal Template</option>
+          <option value="developer" selected>Developer Template</option>
+          <option value="open_source">Open Source Template</option>
+          <option value="freelancer">Freelancer Template</option>
+          <option value="creator">Creator Template</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: var(--space-2); margin-top: var(--space-1);">
+        <button id="btn-mobile-copy-md" class="btn btn--sm" style="flex: 1;">Copy Markdown</button>
+        <button id="btn-mobile-download-md" class="btn btn--sm" style="flex: 1;">Download .md</button>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: var(--space-2); border-top: 1px solid var(--color-border-muted);">
+        <span style="font-size: var(--font-size-xs); color: var(--color-text-secondary);">Quality Score</span>
+        <button id="btn-mobile-quality" class="quality-badge quality-badge--high">
+          <span id="mobile-quality-score">100%</span>
+        </button>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: var(--space-2); border-top: 1px solid var(--color-border-muted); font-size: var(--font-size-xs);">
+        <a href="privacy.html" style="color: var(--color-text-secondary);">Privacy Policy</a>
+        <a href="terms.html" style="color: var(--color-text-secondary);">Terms</a>
+        <a href="cookies.html" style="color: var(--color-text-secondary);">Cookies</a>
+      </div>
+    </div>
 
     <!-- Introductory Landing View (shown before user starts) -->
     <main id="intro-screen" class="intro-screen" role="main">
@@ -167,6 +227,39 @@
           </div>
         </form>
       </div>
+
+      <!-- Designated AdSense Slot on Landing Screen -->
+      <div class="ad-banner-slot" role="complementary" aria-label="Advertisement" id="landing-ad-slot">
+        <span>Advertisement Container (Google AdSense Ready)</span>
+      </div>
+
+      <!-- Landing Screen App Footer -->
+      <footer class="app-footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="footer-col">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <img src="assets/icon_white.png" alt="ReadmeCraft" width="22" height="22" style="border-radius: 4px;">
+              <span style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">ReadmeCraft</span>
+            </div>
+            <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 6px;">
+              Free, browser-only GitHub profile README builder. Zero servers, zero database, DPDP Act &amp; GDPR compliant.
+            </p>
+          </div>
+          <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="cookies.html">Cookie Policy</a>
+            <a href="404.html">404 Page</a>
+            <a href="https://github.com/ReadmeCraft" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; <span id="landing-copyright-year">2026</span> ReadmeCraft. MIT Licensed.</span>
+          <span style="display: inline-flex; align-items: center; gap: 4px;">
+            <span class="status-dot"></span> In-memory execution &bull; No tracking cookies
+          </span>
+        </div>
+      </footer>
     </main>
 
     <!-- Main Workspace (Desktop 3-Column / Mobile Tabbed) -->
@@ -338,6 +431,15 @@
             <input type="text" id="publish-commit-msg" class="form-input" value="docs: update profile README.md">
           </div>
 
+          <div class="form-group" style="margin-top: var(--space-3);">
+            <label class="form-checkbox-label" style="font-size: var(--font-size-xs); align-items: flex-start; cursor: pointer;">
+              <input type="checkbox" id="publish-consent-chk" class="form-checkbox" style="margin-top: 2px;" required>
+              <span style="color: var(--color-text-secondary); line-height: 1.4;">
+                I acknowledge that my Personal Access Token is held purely in browser RAM, never stored, and sent directly to <code>api.github.com</code> per the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> (compliant with India's DPDP Act &amp; GDPR).
+              </span>
+            </label>
+          </div>
+
           <div id="publish-status-box" style="display: none; padding: 10px; border-radius: 6px; font-size: 13px;"></div>
         </form>
         <div class="modal-footer">
@@ -378,10 +480,20 @@
 
     <!-- Toast Notification Container -->
     <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Cookie & Storage Consent Banner (DPDP Act & GDPR compliant) -->
+    <aside id="cookie-consent-banner" class="cookie-consent-banner" role="region" aria-label="Privacy and Storage Notice" style="display: none;">
+      <div class="cookie-consent-text">
+        ReadmeCraft stores drafts locally in your browser's <code>localStorage</code>. No personal data is tracked or sold. Third-party advertising partners (such as Google AdSense) may set cookies. See our <a href="privacy.html" target="_blank" rel="noopener">Privacy</a> and <a href="cookies.html" target="_blank" rel="noopener">Cookie Policy</a>.
+      </div>
+      <div class="cookie-consent-actions">
+        <button id="btn-cookie-accept" class="btn btn--sm btn--primary">Got it</button>
+      </div>
+    </aside>
   </div>
 
   <!-- Main ES Module Bootstrap -->
-  <script type="module" src="src/ui/app.js"></script>
+  <script type="module" src="src/ui/app.js?v=1.0.1"></script>
 </body>
 </html>
 

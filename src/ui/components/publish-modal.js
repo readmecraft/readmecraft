@@ -16,6 +16,7 @@ export class PublishModalComponent {
     this.openBtn = document.getElementById('btn-publish-open');
     this.tokenInput = document.getElementById('publish-token-input');
     this.commitMsgInput = document.getElementById('publish-commit-msg');
+    this.consentChk = document.getElementById('publish-consent-chk');
     this.statusBox = document.getElementById('publish-status-box');
     this.repoTarget = document.getElementById('publish-repo-target');
     this.form = document.getElementById('publish-form');
@@ -79,6 +80,9 @@ export class PublishModalComponent {
     if (this.tokenInput) {
       this.tokenInput.value = '';
     }
+    if (this.consentChk) {
+      this.consentChk.checked = false;
+    }
     this.backdrop?.classList.remove('open');
   }
 
@@ -111,6 +115,12 @@ export class PublishModalComponent {
     if (!token) {
       this.setStatus('Please enter your GitHub Personal Access Token.', 'error');
       this.tokenInput?.focus();
+      return;
+    }
+
+    if (this.consentChk && !this.consentChk.checked) {
+      this.setStatus('Please acknowledge the privacy & token transmission consent before publishing.', 'error');
+      this.consentChk.focus();
       return;
     }
 

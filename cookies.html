@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ReadmeCraft Cookie and Local Storage Policy. Understand how we use browser storage to save your README drafts and manage third-party advertising cookies.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://readmecraft.github.io/cookies.html">
+  <title>Cookie Policy — ReadmeCraft</title>
+  <link rel="icon" type="image/png" href="assets/favicon_dark.png" id="app-favicon">
+  <link rel="stylesheet" href="src/styles/tokens.css">
+  <link rel="stylesheet" href="src/styles/base.css">
+  <link rel="stylesheet" href="src/styles/layout.css">
+  <link rel="stylesheet" href="src/styles/components.css">
+  <style>
+    .legal-page-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .legal-card {
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      line-height: var(--line-height-relaxed);
+    }
+    .legal-card h1 { font-size: var(--font-size-2xl); }
+    .legal-card h2 { font-size: var(--font-size-lg); margin-top: var(--space-4); border-bottom: 1px solid var(--color-border-muted); padding-bottom: var(--space-2); }
+    .legal-card ul { padding-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+    .legal-card p, .legal-card li { color: var(--color-text-secondary); font-size: var(--font-size-base); }
+    .storage-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--space-2);
+      font-size: var(--font-size-sm);
+    }
+    .storage-table th, .storage-table td {
+      border: 1px solid var(--color-border-default);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .storage-table th {
+      background-color: var(--color-bg-subtle);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-root" style="overflow-y: auto; height: auto;">
+    <header class="app-header" role="banner">
+      <a href="index.html" class="header-brand" aria-label="ReadmeCraft Home">
+        <img src="assets/horizontal_lockup_white.png" alt="ReadmeCraft" class="brand-logo brand-logo--light" height="24">
+        <img src="assets/horizontal_lockup_dark.png" alt="ReadmeCraft" class="brand-logo brand-logo--dark" height="24">
+        <span class="brand-tag">v1</span>
+      </a>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn btn--icon btn--subtle" title="Toggle theme" aria-label="Toggle theme">
+          <svg id="theme-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0zm0 13a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13zM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.75.75 0 0 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 0-1.06zm9.193 9.193a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061zM0 8a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H.75A.75.75 0 0 1 0 8zm13 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 13 8zM2.343 13.657a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.062 1.06l-1.061 1.061a.75.75 0 0 1-1.061 0zm9.193-9.193a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.062 1.06l-1.061 1.061a.75.75 0 0 1-1.061 0z"/>
+          </svg>
+        </button>
+        <a href="index.html" class="btn btn--primary">Open Editor</a>
+      </div>
+    </header>
+
+    <main class="legal-page-container">
+      <article class="legal-card">
+        <h1>Cookie & Local Storage Policy</h1>
+        <p><small>Last Revised: November 19, 2026</small></p>
+
+        <h2>1. What are Cookies and Local Storage?</h2>
+        <p>
+          Cookies are small text files stored on your device by your browser. Local Storage is a modern web standard that allows applications to store key-value data directly in your browser with higher capacity and zero overhead.
+        </p>
+
+        <h2>2. How ReadmeCraft Uses Local Storage</h2>
+        <p>
+          ReadmeCraft does not use proprietary tracking cookies. We utilize strictly necessary browser <code>localStorage</code> to deliver core application functionality:
+        </p>
+
+        <table class="storage-table">
+          <thead>
+            <tr>
+              <th>Storage Key</th>
+              <th>Purpose</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>readmecraft_draft_v1</code></td>
+              <td>Stores your active modules, section content, and settings so your work is preserved across refreshes.</td>
+              <td>Persistent (until cleared)</td>
+            </tr>
+            <tr>
+              <td><code>readmecraft_theme_v1</code></td>
+              <td>Remembers your chosen UI appearance (System / Dark / Light mode).</td>
+              <td>Persistent</td>
+            </tr>
+            <tr>
+              <td><code>readmecraft_gh_cache_v1</code></td>
+              <td>Caches public GitHub profile and repository queries to avoid GitHub unauthenticated rate limits.</td>
+              <td>10 Minutes</td>
+            </tr>
+            <tr>
+              <td><code>readmecraft_consent_v1</code></td>
+              <td>Records your acknowledgement of the cookie and privacy notice.</td>
+              <td>12 Months</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>3. Third-Party Advertising Cookies (Google AdSense)</h2>
+        <p>
+          We partner with Google AdSense to display advertisements when you visit our website. Google and its ad technology partners may place and read cookies on your browser, or use web beacons to collect information as a result of ad serving on this site.
+        </p>
+        <p>
+          These cookies allow Google to serve ads based on your visit to ReadmeCraft and other websites on the Internet.
+        </p>
+
+        <h2>4. How to Control or Delete Cookies</h2>
+        <p>
+          You have full control over browser storage and cookies:
+        </p>
+        <ul>
+          <li><strong>Opt-out of Personalized Ads:</strong> Visit <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a>.</li>
+          <li><strong>Browser Cookie Settings:</strong> You can configure your browser to block or alert you about cookies. Note that blocking essential Local Storage will prevent drafts from auto-saving.</li>
+          <li><strong>Clear Local Storage:</strong> You can clear your draft at any time by clicking "Clear Draft" inside the editor or via your browser developer tools (Storage > Local Storage).</li>
+        </ul>
+
+        <h2>5. Updates to This Policy</h2>
+        <p>
+          We may update this policy periodically to reflect changes in our practices or legal obligations. Please review this page periodically.
+        </p>
+      </article>
+    </main>
+
+    <footer class="app-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="assets/icon_white.png" alt="ReadmeCraft" width="22" height="22" style="border-radius: 4px;">
+            <span style="font-weight: 600; font-size: 14px;">ReadmeCraft</span>
+          </div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 6px;">
+            Free, in-browser GitHub profile README generator and publisher.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="cookies.html" class="active">Cookie Policy</a>
+          <a href="index.html">Editor</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="copyright-year">2026</span> ReadmeCraft. MIT Licensed.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="src/ui/theme.js" type="module"></script>
+</body>
+</html>

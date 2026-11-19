@@ -108,6 +108,8 @@ export class ModuleListComponent {
       // Checkbox
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
+      checkbox.id = `mod-toggle-${mod.id}`;
+      checkbox.name = `mod-toggle-${mod.id}`;
       checkbox.className = 'form-checkbox';
       checkbox.checked = mod.enabled;
       checkbox.setAttribute('aria-label', `Include ${mod.title} in README`);

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ReadmeCraft Terms and Conditions. Learn about the rules, usage guidelines, and licensing of our free open-source GitHub profile README generator.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://readmecraft.github.io/terms.html">
+  <title>Terms and Conditions — ReadmeCraft</title>
+  <link rel="icon" type="image/png" href="assets/favicon_dark.png" id="app-favicon">
+  <link rel="stylesheet" href="src/styles/tokens.css">
+  <link rel="stylesheet" href="src/styles/base.css">
+  <link rel="stylesheet" href="src/styles/layout.css">
+  <link rel="stylesheet" href="src/styles/components.css">
+  <style>
+    .legal-page-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .legal-card {
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      line-height: var(--line-height-relaxed);
+    }
+    .legal-card h1 { font-size: var(--font-size-2xl); }
+    .legal-card h2 { font-size: var(--font-size-lg); margin-top: var(--space-4); border-bottom: 1px solid var(--color-border-muted); padding-bottom: var(--space-2); }
+    .legal-card ul { padding-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+    .legal-card p, .legal-card li { color: var(--color-text-secondary); font-size: var(--font-size-base); }
+  </style>
+</head>
+<body>
+  <div class="app-root" style="overflow-y: auto; height: auto;">
+    <header class="app-header" role="banner">
+      <a href="index.html" class="header-brand" aria-label="ReadmeCraft Home">
+        <img src="assets/horizontal_lockup_white.png" alt="ReadmeCraft" class="brand-logo brand-logo--light" height="24">
+        <img src="assets/horizontal_lockup_dark.png" alt="ReadmeCraft" class="brand-logo brand-logo--dark" height="24">
+        <span class="brand-tag">v1</span>
+      </a>
+
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn btn--icon btn--subtle" title="Toggle theme" aria-label="Toggle theme">
+          <svg id="theme-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0zm0 13a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13zM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.75.75 0 0 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 0-1.06zm9.193 9.193a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061zM0 8a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H.75A.75.75 0 0 1 0 8zm13 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 13 8zM2.343 13.657a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.062 1.06l-1.061 1.061a.75.75 0 0 1-1.061 0zm9.193-9.193a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.062 1.06l-1.061 1.061a.75.75 0 0 1-1.061 0z"/>
+          </svg>
+        </button>
+        <a href="index.html" class="btn btn--primary">Open Editor</a>
+      </div>
+    </header>
+
+    <main class="legal-page-container">
+      <article class="legal-card">
+        <h1>Terms and Conditions</h1>
+        <p><small>Effective Date: November 19, 2026</small></p>
+
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+          By accessing or using ReadmeCraft, you agree to comply with and be bound by these Terms and Conditions. If you do not agree, please do not use the tool.
+        </p>
+
+        <h2>2. Description of Service</h2>
+        <p>
+          ReadmeCraft is a free, web-based tool provided on an "as is" and "as available" basis. It enables software engineers and creators to author, preview, format, and publish GitHub profile README markdown files directly to GitHub.
+        </p>
+
+        <h2>3. Permitted and Acceptable Use</h2>
+        <p>You agree to use ReadmeCraft only for lawful purposes. You shall not:</p>
+        <ul>
+          <li>Use the service to distribute abusive, defamatory, malicious, or infringing content.</li>
+          <li>Abuse or attempt to circumvent GitHub API rate limits through automated scrapers or abusive traffic patterns.</li>
+          <li>Attempt to compromise client-side security or reverse engineer non-permissible components.</li>
+        </ul>
+
+        <h2>4. Open Source Licensing</h2>
+        <p>
+          The software code of ReadmeCraft is open source and distributed under the terms of the <strong>MIT License</strong>. You are free to inspect, modify, fork, and distribute the software in compliance with the license terms.
+        </p>
+
+        <h2>5. Disclaimer of Warranties & Limitation of Liability</h2>
+        <p>
+          THE SERVICE IS PROVIDED WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THE TOOL OR INTERACTIONS WITH THE GITHUB API.
+        </p>
+
+        <h2>6. Third-Party Links & Services</h2>
+        <p>
+          ReadmeCraft interfaces with external services, including GitHub REST APIs and third-party badge providers (e.g., Shields.io, Devicons). We are not responsible for the availability, uptime, content, or policies of third-party platforms.
+        </p>
+
+        <h2>7. Modifications to Terms</h2>
+        <p>
+          We reserve the right to modify these Terms at any time. Continued use of the service following any modifications signifies your acceptance of updated terms.
+        </p>
+
+        <h2>8. Governing Law</h2>
+        <p>
+          These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles.
+        </p>
+      </article>
+    </main>
+
+    <footer class="app-footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="assets/icon_white.png" alt="ReadmeCraft" width="22" height="22" style="border-radius: 4px;">
+            <span style="font-weight: 600; font-size: 14px;">ReadmeCraft</span>
+          </div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 6px;">
+            Free, in-browser GitHub profile README generator and publisher.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html" class="active">Terms of Service</a>
+          <a href="cookies.html">Cookie Policy</a>
+          <a href="index.html">Editor</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="copyright-year">2026</span> ReadmeCraft. MIT Licensed.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="src/ui/theme.js" type="module"></script>
+</body>
+</html>

@@ -522,11 +522,11 @@ export class ModuleEditorComponent {
               <button type="button" class="btn btn--subtle btn--sm btn--danger btn-remove-repo" data-idx="${idx}" title="Remove repository">Remove</button>
             </div>
             <div class="form-row">
-              <input type="text" class="form-input repo-name" data-idx="${idx}" placeholder="Repository Name" aria-label="Repository name #${idx + 1}" value="${repo.name || ''}">
-              <input type="text" class="form-input repo-lang" data-idx="${idx}" placeholder="Primary Language" aria-label="Repository language #${idx + 1}" value="${repo.language || ''}">
+              <input type="text" id="repo-name-${idx}" name="repo-name-${idx}" class="form-input repo-name" data-idx="${idx}" placeholder="Repository Name" aria-label="Repository name #${idx + 1}" value="${repo.name || ''}">
+              <input type="text" id="repo-lang-${idx}" name="repo-lang-${idx}" class="form-input repo-lang" data-idx="${idx}" placeholder="Primary Language" aria-label="Repository language #${idx + 1}" value="${repo.language || ''}">
             </div>
-            <input type="text" class="form-input repo-desc" data-idx="${idx}" placeholder="Concise description" aria-label="Repository description #${idx + 1}" value="${repo.description || ''}">
-            <input type="url" class="form-input repo-url" data-idx="${idx}" placeholder="Repository URL (e.g. https://github.com/...)" aria-label="Repository URL #${idx + 1}" value="${repo.url || ''}">
+            <input type="text" id="repo-desc-${idx}" name="repo-desc-${idx}" class="form-input repo-desc" data-idx="${idx}" placeholder="Concise description" aria-label="Repository description #${idx + 1}" value="${repo.description || ''}">
+            <input type="url" id="repo-url-${idx}" name="repo-url-${idx}" class="form-input repo-url" data-idx="${idx}" placeholder="Repository URL (e.g. https://github.com/...)" aria-label="Repository URL #${idx + 1}" value="${repo.url || ''}">
           </div>
         `).join('')}
       </div>
@@ -628,7 +628,7 @@ export class ModuleEditorComponent {
       <div id="social-list-editor" style="display: flex; flex-direction: column; gap: var(--space-2);">
         ${links.map((link, idx) => `
           <div style="display: flex; gap: var(--space-2); align-items: center;">
-            <select class="form-select social-platform" data-idx="${idx}" style="width: 140px;" aria-label="Social platform #${idx + 1}">
+            <select id="social-platform-${idx}" name="social-platform-${idx}" class="form-select social-platform" data-idx="${idx}" style="width: 140px;" aria-label="Social platform #${idx + 1}">
               <option value="Website" ${link.platform === 'Website' ? 'selected' : ''}>Website</option>
               <option value="LinkedIn" ${link.platform === 'LinkedIn' ? 'selected' : ''}>LinkedIn</option>
               <option value="Twitter" ${link.platform === 'Twitter' ? 'selected' : ''}>Twitter / X</option>
@@ -637,7 +637,7 @@ export class ModuleEditorComponent {
               <option value="YouTube" ${link.platform === 'YouTube' ? 'selected' : ''}>YouTube</option>
               <option value="Substack" ${link.platform === 'Substack' ? 'selected' : ''}>Substack</option>
             </select>
-            <input type="url" class="form-input social-url" data-idx="${idx}" placeholder="https://..." aria-label="Profile link URL #${idx + 1}" value="${link.url || ''}" style="flex: 1;">
+            <input type="url" id="social-url-${idx}" name="social-url-${idx}" class="form-input social-url" data-idx="${idx}" placeholder="https://..." aria-label="Profile link URL #${idx + 1}" value="${link.url || ''}" style="flex: 1;">
             <button type="button" class="btn btn--icon-sm btn--danger btn-remove-social" data-idx="${idx}" title="Remove link" aria-label="Remove link #${idx + 1}">×</button>
           </div>
         `).join('')}

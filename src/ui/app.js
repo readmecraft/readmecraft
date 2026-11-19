@@ -8,9 +8,9 @@ import { store } from '../core/state.js';
 import { fetchGitHubPublicData } from '../core/github.js';
 import { initTheme } from './theme.js';
 import { PreviewController } from './preview.js';
-import { ModuleListComponent } from './components/module-list.js';
-import { ModuleEditorComponent } from './components/module-editor.js';
-import { PublishModalComponent } from './components/publish-modal.js';
+import { ModuleListComponent } from './components/module-list.js?v=1.0.1';
+import { ModuleEditorComponent } from './components/module-editor.js?v=1.0.1';
+import { PublishModalComponent } from './components/publish-modal.js?v=1.0.1';
 import { QualityBarComponent } from './components/quality-bar.js';
 
 // Pre-load template definitions
@@ -252,6 +252,75 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (exportDropdown) exportDropdown.style.display = 'none';
   });
 
+  // Mobile Header Menu Drawer Toggle & Actions
+  const btnMobileMenu = document.getElementById('btn-mobile-menu');
+  const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+  const mobileTemplateSelect = document.getElementById('mobile-template-select');
+  const btnMobileCopyMd = document.getElementById('btn-mobile-copy-md');
+  const btnMobileDownloadMd = document.getElementById('btn-mobile-download-md');
+  const btnMobileQuality = document.getElementById('btn-mobile-quality');
+  const mobileQualityScore = document.getElementById('mobile-quality-score');
+
+  btnMobileMenu?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileMenuDrawer?.classList.contains('is-open');
+    mobileMenuDrawer?.classList.toggle('is-open', !isOpen);
+    btnMobileMenu.setAttribute('aria-expanded', (!isOpen).toString());
+  });
+
+  document.addEventListener('click', (e) => {
+    if (mobileMenuDrawer?.classList.contains('is-open') && !mobileMenuDrawer.contains(e.target) && !btnMobileMenu?.contains(e.target)) {
+      mobileMenuDrawer.classList.remove('is-open');
+      btnMobileMenu?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  mobileTemplateSelect?.addEventListener('change', (e) => {
+    const tId = e.target.value;
+    if (TEMPLATES[tId]) {
+      store.dispatch({ type: 'APPLY_TEMPLATE', payload: TEMPLATES[tId] });
+      showToast(`Applied ${TEMPLATES[tId].name} template`, 'info');
+      if (templateSelect) templateSelect.value = tId;
+    }
+  });
+
+  btnMobileCopyMd?.addEventListener('click', () => {
+    copyMarkdownToClipboard(store.getState().markdown);
+    mobileMenuDrawer?.classList.remove('is-open');
+  });
+
+  btnMobileDownloadMd?.addEventListener('click', () => {
+    downloadReadmeFile(store.getState().markdown);
+    mobileMenuDrawer?.classList.remove('is-open');
+  });
+
+  btnMobileQuality?.addEventListener('click', () => {
+    mobileMenuDrawer?.classList.remove('is-open');
+    document.getElementById('quality-trigger')?.click();
+  });
+
+  // Cookie & Local Storage Consent Banner (DPDP Act & GDPR compliant)
+  const cookieBanner = document.getElementById('cookie-consent-banner');
+  const btnCookieAccept = document.getElementById('btn-cookie-accept');
+
+  if (cookieBanner) {
+    const hasConsented = localStorage.getItem('readmecraft_consent_v1');
+    if (!hasConsented) {
+      cookieBanner.style.display = 'flex';
+    }
+    btnCookieAccept?.addEventListener('click', () => {
+      localStorage.setItem('readmecraft_consent_v1', 'accepted');
+      cookieBanner.style.display = 'none';
+      showToast('Storage preferences saved', 'success');
+    });
+  }
+
+  // Dynamic current copyright year
+  const currentYear = new Date().getFullYear().toString();
+  document.querySelectorAll('#copyright-year, #landing-copyright-year').forEach(el => {
+    el.textContent = currentYear;
+  });
+
   // Mobile Bottom Tab Switching
   const mobileNavBtns = document.querySelectorAll('.mobile-nav-btn');
   const panes = {
@@ -304,6 +373,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     moduleList.render(state);
     moduleEditor.render(state);
     qualityBar.render(state);
+
+    // Sync mobile navigation elements
+    if (mobileTemplateSelect && state.template?.id) {
+      mobileTemplateSelect.value = state.template.id;
+    }
+    const scoreVal = document.getElementById('quality-score')?.textContent;
+    if (mobileQualityScore && scoreVal) {
+      mobileQualityScore.textContent = scoreVal;
+    }
   });
 
   // Initial render

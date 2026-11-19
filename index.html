@@ -263,11 +263,11 @@
   <link rel="alternate icon" type="image/png" href="assets/favicon_light.png">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="src/styles/tokens.css?v=1.2.0">
-  <link rel="stylesheet" href="src/styles/base.css?v=1.2.0">
-  <link rel="stylesheet" href="src/styles/layout.css?v=1.2.0">
-  <link rel="stylesheet" href="src/styles/components.css?v=1.2.0">
-  <link rel="stylesheet" href="src/styles/animations.css?v=1.2.0">
+  <link rel="stylesheet" href="src/styles/tokens.css?v=1.2.1">
+  <link rel="stylesheet" href="src/styles/base.css?v=1.2.1">
+  <link rel="stylesheet" href="src/styles/layout.css?v=1.2.1">
+  <link rel="stylesheet" href="src/styles/components.css?v=1.2.1">
+  <link rel="stylesheet" href="src/styles/animations.css?v=1.2.1">
 
   <!-- Vendored Libraries (Pinned) -->
   <script src="vendor/marked-15.0.7.min.js"></script>
@@ -408,9 +408,10 @@
       <div class="landing-steps-grid">
         <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
-            <span class="landing-step-num">1</span>
-            <h3 class="landing-step-title">Choose a Role Blueprint</h3>
+            <span class="landing-step-num">01</span>
+            <span class="landing-step-badge">Blueprint</span>
           </div>
+          <h3 class="landing-step-title">Choose a Role Blueprint</h3>
           <p class="landing-step-desc">
             Pick from 5 curated templates (Developer, Minimal, Open Source, Freelancer, Creator) or enter your GitHub handle to auto-import your bio and public repositories.
           </p>
@@ -418,9 +419,10 @@
 
         <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
-            <span class="landing-step-num">2</span>
-            <h3 class="landing-step-title">Select Tech Badges &amp; Socials</h3>
+            <span class="landing-step-num">02</span>
+            <span class="landing-step-badge">Skills &amp; Socials</span>
           </div>
+          <h3 class="landing-step-title">Select Tech Badges &amp; Socials</h3>
           <p class="landing-step-desc">
             Pick from 65+ tech skill icons across Frontend, Backend, Databases, and DevOps. Add handles for 23+ social platforms including LeetCode, Codeforces, and LinkedIn.
           </p>
@@ -428,9 +430,10 @@
 
         <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
-            <span class="landing-step-num">3</span>
-            <h3 class="landing-step-title">Add Dynamic Stats &amp; ASCII Art</h3>
+            <span class="landing-step-num">03</span>
+            <span class="landing-step-badge">Dynamic Widgets</span>
           </div>
+          <h3 class="landing-step-title">Add Dynamic Stats &amp; ASCII Art</h3>
           <p class="landing-step-desc">
             Embed real-time GitHub commit streak counters, top language graphs, and generate crisp monospace ASCII art headers to give your profile a retro terminal look.
           </p>
@@ -438,9 +441,10 @@
 
         <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
-            <span class="landing-step-num">4</span>
-            <h3 class="landing-step-title">Live Preview &amp; 1-Click Publish</h3>
+            <span class="landing-step-num">04</span>
+            <span class="landing-step-badge">Instant Publish</span>
           </div>
+          <h3 class="landing-step-title">Live Preview &amp; 1-Click Publish</h3>
           <p class="landing-step-desc">
             Verify layout in GitHub Dark/Light modes and on 375px mobile screens. Commit directly to your special <code>username/username</code> repo with 1 click or copy the Markdown.
           </p>
@@ -460,48 +464,66 @@
 
       <div class="landing-feature-grid">
         <div class="landing-feature-card reveal-on-scroll">
-          <div class="landing-feature-icon">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2c1.981 0 3.67.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.67-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2zM8 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+          <div class="landing-feature-header">
+            <div class="landing-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2c1.981 0 3.67.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.67-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2zM8 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+            </div>
+            <span class="landing-feature-tag">Simulation</span>
           </div>
           <h3 class="landing-feature-title">Live GitHub Simulation</h3>
           <p class="landing-feature-desc">See exactly how your profile looks in real time under GitHub's Dark and Light palettes. Includes a 375px mobile container preview so you can verify responsive readability.</p>
         </div>
 
         <div class="landing-feature-card reveal-on-scroll" id="skills">
-          <div class="landing-feature-icon">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/></svg>
+          <div class="landing-feature-header">
+            <div class="landing-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/></svg>
+            </div>
+            <span class="landing-feature-tag">Badges</span>
           </div>
           <h3 class="landing-feature-title">65+ Tech Stack Icons</h3>
           <p class="landing-feature-desc">Interactive tech picker with search and category filtering. Output in high-resolution vector logos, Shields.io badges with official brand hex colors, or minimalist bullet lists.</p>
         </div>
 
         <div class="landing-feature-card reveal-on-scroll">
-          <div class="landing-feature-icon">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M3.75 0a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 3.75 0zM10.25 6a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zM2 13.5a2 2 0 0 1 2-2h3.5a2 2 0 0 1 2 2v1.75a.75.75 0 0 1-.75.75H2.75a.75.75 0 0 1-.75-.75V13.5z"/></svg>
+          <div class="landing-feature-header">
+            <div class="landing-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M3.75 0a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 3.75 0zM10.25 6a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zM2 13.5a2 2 0 0 1 2-2h3.5a2 2 0 0 1 2 2v1.75a.75.75 0 0 1-.75.75H2.75a.75.75 0 0 1-.75-.75V13.5z"/></svg>
+            </div>
+            <span class="landing-feature-tag">Networks</span>
           </div>
           <h3 class="landing-feature-title">23+ Social &amp; Coding Networks</h3>
           <p class="landing-feature-desc">Showcase your presence across LeetCode, Codeforces, HackerRank, GitHub, LinkedIn, Twitter/X, Dev.to, Medium, Discord, YouTube, and Buy Me a Coffee with authentic brand SVG icons.</p>
         </div>
 
         <div class="landing-feature-card reveal-on-scroll">
-          <div class="landing-feature-icon">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/></svg>
+          <div class="landing-feature-header">
+            <div class="landing-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/></svg>
+            </div>
+            <span class="landing-feature-tag">1-Click API</span>
           </div>
           <h3 class="landing-feature-title">1-Click Publish to GitHub</h3>
           <p class="landing-feature-desc">Direct commit to your special <code>username/username</code> repo via official GitHub REST APIs. Automatically initializes the repository if missing, and manages commit SHA updates seamlessly.</p>
         </div>
 
         <div class="landing-feature-card reveal-on-scroll">
-          <div class="landing-feature-icon">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.61zM10.28 4.28L3.97 10.59a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.249.249 0 0 0 .108-.064l6.31-6.31-1.44-1.44z"/></svg>
+          <div class="landing-feature-header">
+            <div class="landing-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.61zM10.28 4.28L3.97 10.59a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.249.249 0 0 0 .108-.064l6.31-6.31-1.44-1.44z"/></svg>
+            </div>
+            <span class="landing-feature-tag">Terminal Art</span>
           </div>
           <h3 class="landing-feature-title">Monospace ASCII Banners</h3>
           <p class="landing-feature-desc">Generate crisp ASCII art text headers or convert uploaded images with width, contrast, and charset controls (Standard, Dense, Unicode Blocks) to add a terminal aesthetic to your profile.</p>
         </div>
 
         <div class="landing-feature-card reveal-on-scroll">
-          <div class="landing-feature-icon">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+          <div class="landing-feature-header">
+            <div class="landing-feature-icon">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+            </div>
+            <span class="landing-feature-tag">Audit &amp; Lint</span>
           </div>
           <h3 class="landing-feature-title">Quality &amp; Completeness Audit</h3>
           <p class="landing-feature-desc">Automatic linting checks your profile for invalid URL formatting, missing alt text, over-crowded modules (&gt;8 warnings), and calculates an authoring score to maximize engagement.</p>
@@ -900,10 +922,45 @@
         </p>
       </div>
 
-      <div class="security-note reveal-on-scroll" style="max-width: 820px; margin: 0 auto; padding: var(--space-5); line-height: 1.6; font-size: var(--font-size-xs);">
-        <p><strong>1. In-Memory Execution:</strong> When you provide a GitHub Personal Access Token to commit your README, the token is held strictly in JavaScript heap memory during that specific HTTPS request to <code>api.github.com</code>. It is never written to <code>localStorage</code> or disk.</p>
-        <p style="margin-top: var(--space-2);"><strong>2. Local Storage Persistence:</strong> Profile draft content and theme preferences are stored exclusively on your device in your browser's <code>localStorage</code>. You can clear them at any time with a single click.</p>
-        <p style="margin-top: var(--space-2);"><strong>3. DPDP Act &amp; GDPR Compliant:</strong> Built in accordance with India's Digital Personal Data Protection Act, 2023 and GDPR guidelines with transparent notices and grievance redressal at <code>privacy@readmecraft.org</code>.</p>
+      <div class="security-grid">
+        <article class="security-card reveal-on-scroll">
+          <div class="security-card-header">
+            <div class="security-icon-box">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8.533.133a1.75 1.75 0 0 0-1.066 0l-5.25 1.68A1.75 1.75 0 0 0 1 3.48v4.27c0 4.292 2.775 7.644 6.757 8.22a.75.75 0 0 0 .486 0C12.225 15.394 15 12.042 15 7.75V3.48a1.75 1.75 0 0 0-1.217-1.667L8.533.133zm-.592 1.44a.25.25 0 0 1 .152 0l5.25 1.68a.25.25 0 0 1 .174.238v4.259c0 3.535-2.26 6.32-5.517 6.845a7.514 7.514 0 0 1-.968.043c-3.238-.53-5.465-3.32-5.465-6.888V3.491a.25.25 0 0 1 .174-.238l5.25-1.68z"/></svg>
+            </div>
+            <span class="security-badge">RAM VOLATILE</span>
+          </div>
+          <h3 class="security-card-title">In-Memory Execution</h3>
+          <p class="security-card-desc">
+            GitHub Personal Access Tokens are held strictly in JavaScript heap memory during the direct HTTPS commit call to <code>api.github.com</code>. Tokens are immediately purged upon modal close and never written to disk or storage.
+          </p>
+        </article>
+
+        <article class="security-card reveal-on-scroll">
+          <div class="security-card-header">
+            <div class="security-icon-box">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25H1.75zM8 4a.75.75 0 0 1 .75.75v6.5a.75.75 0 0 1-1.5 0v-6.5A.75.75 0 0 1 8 4z"/></svg>
+            </div>
+            <span class="security-badge">100% LOCAL</span>
+          </div>
+          <h3 class="security-card-title">Local Storage Isolation</h3>
+          <p class="security-card-desc">
+            Profile drafts, custom inputs, and theme selections persist exclusively inside your local browser's <code>localStorage</code> sandbox. No user data or analytics ever touch a remote cloud backend.
+          </p>
+        </article>
+
+        <article class="security-card reveal-on-scroll">
+          <div class="security-card-header">
+            <div class="security-icon-box">
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+            </div>
+            <span class="security-badge">DPDP &amp; GDPR</span>
+          </div>
+          <h3 class="security-card-title">Compliance &amp; Privacy</h3>
+          <p class="security-card-desc">
+            Engineered under India's Digital Personal Data Protection Act (DPDP), 2023 and European Union GDPR principles. Zero tracking cookies, zero marketing beacons, and transparent grievance redressal.
+          </p>
+        </article>
       </div>
     </section>
 
@@ -916,51 +973,91 @@
 
       <div class="landing-faq-grid">
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Overview</span>
+          </div>
           <h3 class="landing-faq-q">What is a GitHub profile README and why do I need one?</h3>
           <p class="landing-faq-a">A GitHub profile README is a special markdown file displayed prominently at the top of your public GitHub profile page. It acts as an interactive developer portfolio, allowing engineers to showcase their tech stack, open-source contributions, coding stats, streak counters, and social contact links to hiring managers and recruiters.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Repository</span>
+          </div>
           <h3 class="landing-faq-q">How do I create a special repository for my GitHub profile README?</h3>
           <p class="landing-faq-a">Create a new public repository on GitHub where the repository name exactly matches your GitHub username (e.g. <code>username/username</code>). GitHub will recognize this as a special repository and automatically render its root README.md on your public profile page. ReadmeCraft can also create and initialize this repository automatically with 1-click publishing.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Tech Badges</span>
+          </div>
           <h3 class="landing-faq-q">How do I add tech stack icons and skill badges to my GitHub README?</h3>
           <p class="landing-faq-a">ReadmeCraft provides an interactive picker with 65+ tech stack icons across Languages, Frontend, Backend, Cloud, and Tools. You can output them as high-resolution Devicon vector SVGs, official Shields.io badges with brand hex colors, or clean minimal markdown lists.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Live Stats</span>
+          </div>
           <h3 class="landing-faq-q">How do dynamic GitHub stats cards and streak counters work?</h3>
           <p class="landing-faq-a">Dynamic stats cards query GitHub's public API to display your total commits, pull requests, stars, current contribution streaks, and top languages. In ReadmeCraft, you can customize color themes, borders, and layouts to seamlessly match GitHub Dark or Light mode.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Presets</span>
+          </div>
           <h3 class="landing-faq-q">What are the best templates for a developer GitHub profile?</h3>
           <p class="landing-faq-a">ReadmeCraft includes 5 role-tailored templates: <strong>Developer</strong> (balanced profile with tech badges and streak cards), <strong>Minimal</strong> (clean text-first typography for senior engineers), <strong>Open Source</strong> (maintainer-focused with package cards and sponsor links), <strong>Freelancer</strong> (availability status and booking links), and <strong>Creator</strong> (blog posts, YouTube videos, and talks).</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Free &amp; Open Source</span>
+          </div>
           <h3 class="landing-faq-q">Is ReadmeCraft free and open source?</h3>
           <p class="landing-faq-a">Yes. ReadmeCraft is 100% free and open-source under the MIT License. There are no paywalls, premium tiers, accounts, or subscriptions required.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Security &amp; PAT</span>
+          </div>
           <h3 class="landing-faq-q">Is my GitHub Personal Access Token safe with ReadmeCraft?</h3>
           <p class="landing-faq-a">Yes, completely safe. ReadmeCraft runs 100% in your browser. Personal Access Tokens are held exclusively in volatile RAM during the direct HTTPS request to api.github.com and are immediately cleared when the publish modal closes. Tokens are never saved to localStorage, cookies, or any remote server.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Comparison</span>
+          </div>
           <h3 class="landing-faq-q">How does ReadmeCraft compare to other GitHub profile README generators?</h3>
           <p class="landing-faq-a">Unlike older generators, ReadmeCraft offers a dual real-time GitHub Dark and Light preview, 375px mobile responsiveness testing, 65+ modern tech badges, competitive programming platforms (LeetCode, Codeforces), 1-click GitHub commit publishing, ASCII banner generation, completeness linting, and guaranteed zero-server privacy.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Mobile Testing</span>
+          </div>
           <h3 class="landing-faq-q">Can I preview how my GitHub README looks on mobile devices?</h3>
           <p class="landing-faq-a">Yes. ReadmeCraft features a dedicated 375px mobile simulation frame inside the editor, enabling you to verify badge wrapping, card scaling, and table readability on mobile screens before publishing.</p>
         </div>
 
         <div class="landing-faq-item reveal-on-scroll">
+          <div class="landing-faq-header">
+            <span class="faq-icon-box">?</span>
+            <span class="faq-cat-tag">Compliance</span>
+          </div>
           <h3 class="landing-faq-q">Does ReadmeCraft comply with privacy laws like GDPR and India's DPDP Act?</h3>
           <p class="landing-faq-a">Yes. ReadmeCraft operates under a zero-server data processing model with zero persistent cookies and zero user tracking databases, complying fully with the Digital Personal Data Protection Act (DPDP), 2023 of India and European Union GDPR standards.</p>
         </div>

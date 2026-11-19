@@ -44,7 +44,7 @@ Currently developing high-throughput telemetry pipelines and open-source develop
 </p>
 `;
 
-document.addEventListener('DOMContentLoaded', () => {
+function initLanding() {
   // Initialize theme
   initTheme(store);
 
@@ -140,4 +140,57 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#landing-copyright-year, #copyright-year').forEach(el => {
     el.textContent = currentYear;
   });
-});
+
+  // Setup Staggered Scroll-Driven Reveal Animations
+  const observerOptions = {
+    threshold: 0.02,
+    rootMargin: '0px 0px 100px 0px'
+  };
+
+  const revealEl = (el) => {
+    el.classList.add('is-revealed');
+  };
+
+  if ('IntersectionObserver' in window) {
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          revealEl(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+      // Assign subtle stagger based on sibling position in grids
+      if (!el.style.getPropertyValue('--reveal-delay')) {
+        const parent = el.parentElement;
+        if (parent && (parent.classList.contains('landing-feature-grid') || 
+                       parent.classList.contains('landing-steps-grid') || 
+                       parent.classList.contains('landing-template-grid') || 
+                       parent.classList.contains('best-practices-grid') || 
+                       parent.classList.contains('landing-faq-grid'))) {
+          const siblingIndex = Array.from(parent.children).indexOf(el);
+          el.style.setProperty('--reveal-delay', `${(siblingIndex % 4) * 60}ms`);
+        }
+      }
+
+      // Check if already in viewport
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= window.innerHeight + 100) {
+        revealEl(el);
+      } else {
+        scrollObserver.observe(el);
+      }
+    });
+  } else {
+    // Fallback for older browsers
+    document.querySelectorAll('.reveal-on-scroll').forEach(revealEl);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLanding);
+} else {
+  initLanding();
+}

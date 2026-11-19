@@ -1,0 +1,477 @@
+/**
+ * ReadmeCraft — Motion & Animation System
+ * Engineered for 60fps GPU acceleration using transform & opacity.
+ * Features ambient radiant gradient flow, border beam illumination,
+ * staggered scroll reveals, and responsive micro-interactions.
+ */
+
+/* ==========================================================================
+   1. Ambient Radiant Gradient Mesh ("Greading Motion")
+   ========================================================================== */
+
+.ambient-gradient-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 850px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-gradient-mesh {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140%;
+  max-width: 1500px;
+  height: 750px;
+  background: 
+    radial-gradient(ellipse 60% 50% at 50% 25%, rgba(47, 129, 247, 0.22), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 20% 40%, rgba(56, 189, 248, 0.16), transparent 60%),
+    radial-gradient(ellipse 45% 45% at 80% 30%, rgba(139, 92, 246, 0.18), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 75%, rgba(63, 185, 80, 0.10), transparent 70%);
+  filter: blur(65px);
+  opacity: 0.9;
+  animation: radiantAuraFlow 16s ease-in-out infinite alternate;
+  will-change: transform, filter, opacity;
+}
+
+[data-theme="light"] .ambient-gradient-mesh {
+  background: 
+    radial-gradient(ellipse 60% 50% at 50% 25%, rgba(9, 105, 218, 0.12), transparent 70%),
+    radial-gradient(ellipse 45% 45% at 20% 40%, rgba(31, 111, 235, 0.08), transparent 60%),
+    radial-gradient(ellipse 45% 45% at 80% 30%, rgba(130, 80, 223, 0.10), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 75%, rgba(26, 127, 55, 0.06), transparent 70%);
+  filter: blur(75px);
+  opacity: 0.75;
+}
+
+@keyframes radiantAuraFlow {
+  0% {
+    transform: translateX(-50%) rotate(0deg) scale(1);
+    filter: blur(65px);
+  }
+  33% {
+    transform: translateX(-47%) rotate(2.5deg) scale(1.05);
+    filter: blur(75px);
+  }
+  66% {
+    transform: translateX(-53%) rotate(-2deg) scale(0.97);
+    filter: blur(60px);
+  }
+  100% {
+    transform: translateX(-50%) rotate(1deg) scale(1.03);
+    filter: blur(70px);
+  }
+}
+
+/* ==========================================================================
+   2. Glowing Border Beam for Hero Preview
+   ========================================================================== */
+
+.landing-preview-wrapper {
+  position: relative;
+  isolation: isolate;
+  transition: transform var(--duration-normal) var(--ease-default),
+              box-shadow var(--duration-normal) var(--ease-default);
+}
+
+.landing-preview-wrapper:hover {
+  box-shadow: 0 20px 48px -12px rgba(47, 129, 247, 0.22);
+}
+
+.landing-preview-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius-lg) + 1px);
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(47, 129, 247, 0.6) 20%,
+    rgba(56, 189, 248, 0.9) 50%,
+    rgba(139, 92, 246, 0.6) 80%,
+    transparent 100%
+  );
+  background-size: 250% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderBeam 7s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes borderBeam {
+  0% {
+    background-position: 250% 0;
+  }
+  100% {
+    background-position: -250% 0;
+  }
+}
+
+/* ==========================================================================
+   3. Animated Gradient Buttons & Shimmer
+   ========================================================================== */
+
+.btn--animated-gradient {
+  position: relative;
+  background: linear-gradient(135deg, #2f81f7 0%, #1f6feb 45%, #238636 100%) !important;
+  background-size: 220% 220% !important;
+  animation: buttonGradientFlow 5s ease infinite alternate;
+  box-shadow: 0 4px 14px rgba(47, 129, 247, 0.35);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn--animated-gradient:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(47, 129, 247, 0.45);
+}
+
+.btn--animated-gradient:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes buttonGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ==========================================================================
+   4. Status Dot Pulsing Radar
+   ========================================================================== */
+
+.status-dot {
+  position: relative;
+}
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--color-success);
+  opacity: 0.6;
+  animation: statusRadar 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes statusRadar {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  65% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   5. Orchestrated Hero Entrance Animations
+   ========================================================================== */
+
+.animate-hero-pill {
+  animation: heroFadeSlideDown 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.animate-hero-title {
+  animation: heroFadeSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.animate-hero-subtitle {
+  animation: heroFadeSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.animate-hero-actions {
+  animation: heroFadeSlideUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.animate-hero-preview {
+  animation: heroPreviewLift 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+@keyframes heroFadeSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroFadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroPreviewLift {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   6. Scroll-Driven Stagger Reveal
+   ========================================================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section Header Slide In */
+.landing-section-header.reveal-on-scroll {
+  transform: translateY(16px);
+}
+.landing-section-header.reveal-on-scroll.is-revealed {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   7. Micro-Interactions & Hover Dynamics
+   ========================================================================== */
+
+/* Step Cards */
+.landing-step-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-step-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 28px -8px rgba(47, 129, 247, 0.20);
+}
+
+.landing-step-card:hover .landing-step-num {
+  transform: scale(1.1) rotate(4deg);
+  background: var(--color-accent);
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-step-num {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Feature Cards */
+.landing-feature-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 28px -8px rgba(47, 129, 247, 0.18);
+}
+
+.landing-feature-card:hover .landing-feature-icon {
+  transform: scale(1.12);
+  color: var(--color-accent);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-feature-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Template Cards */
+.landing-template-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-template-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 12px 32px -8px rgba(47, 129, 247, 0.22);
+}
+
+.landing-template-card:hover .btn-use-template {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(47, 129, 247, 0.3);
+}
+
+/* Best Practice Cards */
+.best-practice-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.best-practice-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 28px -8px rgba(47, 129, 247, 0.18);
+}
+
+.best-practice-card:hover svg {
+  transform: scale(1.15);
+  color: var(--color-accent);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.best-practice-card svg {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* FAQ Items */
+.landing-faq-item {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-faq-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 20px -6px rgba(47, 129, 247, 0.16);
+}
+
+/* Comparison Table Rows */
+.comparison-table tr {
+  transition: background-color 0.2s ease;
+}
+
+/* Interactive Brand Logo Hover */
+.header-brand {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.header-brand:hover {
+  transform: scale(1.02);
+}
+
+/* Nav Links Subtle Glow Indicator */
+.landing-nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.landing-nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Final CTA Banner Ambient Motion */
+.landing-cta-banner {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-cta-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(47, 129, 247, 0.10), transparent 60%);
+  animation: ctaAura 12s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ctaAura {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(4%, 3%) scale(1.08); }
+  100% { transform: translate(-3%, -2%) scale(0.95); }
+}
+
+.landing-cta-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px -10px rgba(47, 129, 247, 0.25);
+}
+
+/* Interactive Input Focus Glow */
+.landing-import-form .form-input:focus {
+  box-shadow: 0 0 0 3px rgba(47, 129, 247, 0.35);
+  border-color: var(--color-accent);
+}
+
+/* ==========================================================================
+   8. Accessibility: Prefers-Reduced-Motion Guard
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ambient-gradient-mesh,
+  .landing-preview-wrapper::before,
+  .btn--animated-gradient,
+  .status-dot::after,
+  .landing-cta-banner::before {
+    animation: none !important;
+  }
+}

@@ -267,6 +267,7 @@
   <link rel="stylesheet" href="src/styles/base.css">
   <link rel="stylesheet" href="src/styles/layout.css">
   <link rel="stylesheet" href="src/styles/components.css">
+  <link rel="stylesheet" href="src/styles/animations.css">
 
   <!-- Vendored Libraries (Pinned) -->
   <script src="vendor/marked-15.0.7.min.js"></script>
@@ -274,6 +275,11 @@
 </head>
 <body>
   <div class="landing-page" id="app">
+    <!-- Ambient Radiant Gradient Mesh Background ("Greading Motion") -->
+    <div class="ambient-gradient-canvas" aria-hidden="true">
+      <div class="ambient-gradient-mesh"></div>
+    </div>
+
     <!-- Slim Navigation Bar -->
     <header class="app-header" role="banner">
       <a href="index.html" class="header-brand" aria-label="ReadmeCraft Home">
@@ -299,7 +305,7 @@
           </svg>
         </button>
 
-        <a href="editor.html" class="btn btn--primary" title="Launch ReadmeCraft builder">
+        <a href="editor.html" class="btn btn--primary btn--animated-gradient" title="Launch ReadmeCraft builder">
           <span>Open Editor</span>
           <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
             <path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06z"/>
@@ -310,20 +316,20 @@
 
     <!-- Hero Section -->
     <main id="hero" class="landing-hero" role="main">
-      <div class="landing-pill">
+      <div class="landing-pill animate-hero-pill">
         <span class="status-dot"></span>
         <span>v1.0 &bull; 100% In-Browser &bull; Zero Accounts Required</span>
       </div>
 
-      <h1 class="landing-title">
+      <h1 class="landing-title animate-hero-title">
         Free GitHub Profile README Generator &amp; Builder
       </h1>
 
-      <p class="landing-subtitle">
+      <p class="landing-subtitle animate-hero-subtitle">
         Generate a standout, recruiter-ready developer profile README in minutes. Live GitHub Dark &amp; Light mode split simulation, 65+ curated tech stack badges, 23+ social platforms, dynamic stats cards, ASCII banners, and 1-click publishing directly to your <code>username/username</code> repository.
       </p>
 
-      <div class="landing-hero-actions">
+      <div class="landing-hero-actions animate-hero-actions">
         <form id="landing-import-form" class="landing-import-form" action="editor.html" method="GET">
           <input type="text"
                  id="landing-username-input"
@@ -333,7 +339,7 @@
                  autocomplete="username"
                  spellcheck="false"
                  style="flex: 1;">
-          <button type="submit" class="btn btn--primary" style="white-space: nowrap;">
+          <button type="submit" class="btn btn--primary btn--animated-gradient" style="white-space: nowrap;">
             Import &amp; Build →
           </button>
         </form>
@@ -354,7 +360,7 @@
       </div>
 
       <!-- Live Interactive GitHub Profile Preview Simulation -->
-      <div class="landing-preview-wrapper">
+      <div class="landing-preview-wrapper animate-hero-preview">
         <div class="landing-preview-chrome">
           <div style="display: flex; align-items: center; gap: var(--space-2);">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
@@ -391,7 +397,7 @@
 
     <!-- How It Works Section (AEO / SEO Step-by-Step Workflow) -->
     <section id="how-it-works" class="landing-section" aria-labelledby="how-it-works-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Quickstart Workflow</span>
         <h2 id="how-it-works-title" class="landing-section-title">How to Create a GitHub Profile README</h2>
         <p class="landing-section-desc">
@@ -400,7 +406,7 @@
       </div>
 
       <div class="landing-steps-grid">
-        <article class="landing-step-card">
+        <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
             <span class="landing-step-num">1</span>
             <h3 class="landing-step-title">Choose a Role Blueprint</h3>
@@ -410,7 +416,7 @@
           </p>
         </article>
 
-        <article class="landing-step-card">
+        <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
             <span class="landing-step-num">2</span>
             <h3 class="landing-step-title">Select Tech Badges &amp; Socials</h3>
@@ -420,7 +426,7 @@
           </p>
         </article>
 
-        <article class="landing-step-card">
+        <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
             <span class="landing-step-num">3</span>
             <h3 class="landing-step-title">Add Dynamic Stats &amp; ASCII Art</h3>
@@ -430,7 +436,7 @@
           </p>
         </article>
 
-        <article class="landing-step-card">
+        <article class="landing-step-card reveal-on-scroll">
           <div class="landing-step-header">
             <span class="landing-step-num">4</span>
             <h3 class="landing-step-title">Live Preview &amp; 1-Click Publish</h3>
@@ -444,7 +450,7 @@
 
     <!-- Features Section -->
     <section id="features" class="landing-section" aria-labelledby="features-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Core Features</span>
         <h2 id="features-title" class="landing-section-title">Engineered for quality, not generic noise.</h2>
         <p class="landing-section-desc">
@@ -453,7 +459,7 @@
       </div>
 
       <div class="landing-feature-grid">
-        <div class="landing-feature-card">
+        <div class="landing-feature-card reveal-on-scroll">
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2c1.981 0 3.67.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.67-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2zM8 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
           </div>
@@ -461,7 +467,7 @@
           <p class="landing-feature-desc">See exactly how your profile looks in real time under GitHub's Dark and Light palettes. Includes a 375px mobile container preview so you can verify responsive readability.</p>
         </div>
 
-        <div class="landing-feature-card" id="skills">
+        <div class="landing-feature-card reveal-on-scroll" id="skills">
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/></svg>
           </div>
@@ -469,7 +475,7 @@
           <p class="landing-feature-desc">Interactive tech picker with search and category filtering. Output in high-resolution vector logos, Shields.io badges with official brand hex colors, or minimalist bullet lists.</p>
         </div>
 
-        <div class="landing-feature-card">
+        <div class="landing-feature-card reveal-on-scroll">
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M3.75 0a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 3.75 0zM10.25 6a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zM2 13.5a2 2 0 0 1 2-2h3.5a2 2 0 0 1 2 2v1.75a.75.75 0 0 1-.75.75H2.75a.75.75 0 0 1-.75-.75V13.5z"/></svg>
           </div>
@@ -477,7 +483,7 @@
           <p class="landing-feature-desc">Showcase your presence across LeetCode, Codeforces, HackerRank, GitHub, LinkedIn, Twitter/X, Dev.to, Medium, Discord, YouTube, and Buy Me a Coffee with authentic brand SVG icons.</p>
         </div>
 
-        <div class="landing-feature-card">
+        <div class="landing-feature-card reveal-on-scroll">
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/></svg>
           </div>
@@ -485,7 +491,7 @@
           <p class="landing-feature-desc">Direct commit to your special <code>username/username</code> repo via official GitHub REST APIs. Automatically initializes the repository if missing, and manages commit SHA updates seamlessly.</p>
         </div>
 
-        <div class="landing-feature-card">
+        <div class="landing-feature-card reveal-on-scroll">
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.61zM10.28 4.28L3.97 10.59a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.249.249 0 0 0 .108-.064l6.31-6.31-1.44-1.44z"/></svg>
           </div>
@@ -493,7 +499,7 @@
           <p class="landing-feature-desc">Generate crisp ASCII art text headers or convert uploaded images with width, contrast, and charset controls (Standard, Dense, Unicode Blocks) to add a terminal aesthetic to your profile.</p>
         </div>
 
-        <div class="landing-feature-card">
+        <div class="landing-feature-card reveal-on-scroll">
           <div class="landing-feature-icon">
             <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
           </div>
@@ -505,7 +511,7 @@
 
     <!-- Feature Comparison Section (AEO & Competitive SEO Matrix) -->
     <section id="comparison" class="landing-section" aria-labelledby="comparison-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Competitive Matrix</span>
         <h2 id="comparison-title" class="landing-section-title">Why Developers Choose ReadmeCraft</h2>
         <p class="landing-section-desc">
@@ -513,7 +519,7 @@
         </p>
       </div>
 
-      <div class="comparison-table-wrapper">
+      <div class="comparison-table-wrapper reveal-on-scroll">
         <table class="comparison-table" aria-label="Feature comparison matrix">
           <thead>
             <tr>
@@ -579,7 +585,7 @@
 
     <!-- Templates Showcase Section -->
     <section id="templates" class="landing-section" aria-labelledby="templates-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Curated Presets</span>
         <h2 id="templates-title" class="landing-section-title">5 templates built for distinct developer roles.</h2>
         <p class="landing-section-desc">
@@ -588,7 +594,7 @@
       </div>
 
       <div class="landing-template-grid">
-        <div class="landing-template-card">
+        <div class="landing-template-card reveal-on-scroll">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: baseline;">
               <h3 style="font-size: var(--font-size-base); font-weight: 600;">Developer</h3>
@@ -608,7 +614,7 @@
           </button>
         </div>
 
-        <div class="landing-template-card">
+        <div class="landing-template-card reveal-on-scroll">
           <div>
             <h3 style="font-size: var(--font-size-base); font-weight: 600;">Minimal</h3>
             <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 6px;">
@@ -625,7 +631,7 @@
           </button>
         </div>
 
-        <div class="landing-template-card">
+        <div class="landing-template-card reveal-on-scroll">
           <div>
             <h3 style="font-size: var(--font-size-base); font-weight: 600;">Open Source</h3>
             <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 6px;">
@@ -642,7 +648,7 @@
           </button>
         </div>
 
-        <div class="landing-template-card">
+        <div class="landing-template-card reveal-on-scroll">
           <div>
             <h3 style="font-size: var(--font-size-base); font-weight: 600;">Freelancer</h3>
             <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 6px;">
@@ -659,7 +665,7 @@
           </button>
         </div>
 
-        <div class="landing-template-card">
+        <div class="landing-template-card reveal-on-scroll">
           <div>
             <h3 style="font-size: var(--font-size-base); font-weight: 600;">Creator</h3>
             <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: 6px;">
@@ -680,7 +686,7 @@
 
     <!-- Developer Best Practices Guide Section (AEO Information Gain) -->
     <section id="guide" class="landing-section" aria-labelledby="guide-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Developer Playbook</span>
         <h2 id="guide-title" class="landing-section-title">GitHub Profile README Best Practices for 2026</h2>
         <p class="landing-section-desc">
@@ -689,7 +695,7 @@
       </div>
 
       <div class="best-practices-grid">
-        <article class="best-practice-card">
+        <article class="best-practice-card reveal-on-scroll">
           <h3>
             <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215z"/></svg>
             1. Keep the Hero Punchy
@@ -699,7 +705,7 @@
           </p>
         </article>
 
-        <article class="best-practice-card">
+        <article class="best-practice-card reveal-on-scroll">
           <h3>
             <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/></svg>
             2. Curate, Don't Overcrowd
@@ -709,7 +715,7 @@
           </p>
         </article>
 
-        <article class="best-practice-card">
+        <article class="best-practice-card reveal-on-scroll">
           <h3>
             <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 3.75a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 1.5 0v-3.5z"/></svg>
             3. Show Dynamic Proof-of-Work
@@ -719,7 +725,7 @@
           </p>
         </article>
 
-        <article class="best-practice-card">
+        <article class="best-practice-card reveal-on-scroll">
           <h3>
             <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.75 0a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 3.75 0zM10.25 6a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zM2 13.5a2 2 0 0 1 2-2h3.5a2 2 0 0 1 2 2v1.75a.75.75 0 0 1-.75.75H2.75a.75.75 0 0 1-.75-.75V13.5z"/></svg>
             4. Verify Mobile &amp; Light Themes
@@ -733,7 +739,7 @@
 
     <!-- Architecture & Privacy Section -->
     <section id="privacy" class="landing-section" aria-labelledby="privacy-arch-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Security Architecture</span>
         <h2 id="privacy-arch-title" class="landing-section-title">Zero Servers. Zero Databases. 100% Client-Side.</h2>
         <p class="landing-section-desc">
@@ -741,7 +747,7 @@
         </p>
       </div>
 
-      <div class="security-note" style="max-width: 820px; margin: 0 auto; padding: var(--space-5); line-height: 1.6; font-size: var(--font-size-xs);">
+      <div class="security-note reveal-on-scroll" style="max-width: 820px; margin: 0 auto; padding: var(--space-5); line-height: 1.6; font-size: var(--font-size-xs);">
         <p><strong>1. In-Memory Execution:</strong> When you provide a GitHub Personal Access Token to commit your README, the token is held strictly in JavaScript heap memory during that specific HTTPS request to <code>api.github.com</code>. It is never written to <code>localStorage</code> or disk.</p>
         <p style="margin-top: var(--space-2);"><strong>2. Local Storage Persistence:</strong> Profile draft content and theme preferences are stored exclusively on your device in your browser's <code>localStorage</code>. You can clear them at any time with a single click.</p>
         <p style="margin-top: var(--space-2);"><strong>3. DPDP Act &amp; GDPR Compliant:</strong> Built in accordance with India's Digital Personal Data Protection Act, 2023 and GDPR guidelines with transparent notices and grievance redressal at <code>privacy@readmecraft.org</code>.</p>
@@ -750,58 +756,58 @@
 
     <!-- FAQ Section -->
     <section id="faq" class="landing-section" aria-labelledby="faq-title">
-      <div class="landing-section-header">
+      <div class="landing-section-header reveal-on-scroll">
         <span class="landing-section-tag">Common Questions</span>
         <h2 id="faq-title" class="landing-section-title">Frequently Asked Questions</h2>
       </div>
 
       <div class="landing-faq-grid">
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">What is a GitHub profile README and why do I need one?</h3>
           <p class="landing-faq-a">A GitHub profile README is a special markdown file displayed prominently at the top of your public GitHub profile page. It acts as an interactive developer portfolio, allowing engineers to showcase their tech stack, open-source contributions, coding stats, streak counters, and social contact links to hiring managers and recruiters.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">How do I create a special repository for my GitHub profile README?</h3>
           <p class="landing-faq-a">Create a new public repository on GitHub where the repository name exactly matches your GitHub username (e.g. <code>username/username</code>). GitHub will recognize this as a special repository and automatically render its root README.md on your public profile page. ReadmeCraft can also create and initialize this repository automatically with 1-click publishing.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">How do I add tech stack icons and skill badges to my GitHub README?</h3>
           <p class="landing-faq-a">ReadmeCraft provides an interactive picker with 65+ tech stack icons across Languages, Frontend, Backend, Cloud, and Tools. You can output them as high-resolution Devicon vector SVGs, official Shields.io badges with brand hex colors, or clean minimal markdown lists.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">How do dynamic GitHub stats cards and streak counters work?</h3>
           <p class="landing-faq-a">Dynamic stats cards query GitHub's public API to display your total commits, pull requests, stars, current contribution streaks, and top languages. In ReadmeCraft, you can customize color themes, borders, and layouts to seamlessly match GitHub Dark or Light mode.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">What are the best templates for a developer GitHub profile?</h3>
           <p class="landing-faq-a">ReadmeCraft includes 5 role-tailored templates: <strong>Developer</strong> (balanced profile with tech badges and streak cards), <strong>Minimal</strong> (clean text-first typography for senior engineers), <strong>Open Source</strong> (maintainer-focused with package cards and sponsor links), <strong>Freelancer</strong> (availability status and booking links), and <strong>Creator</strong> (blog posts, YouTube videos, and talks).</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">Is ReadmeCraft free and open source?</h3>
           <p class="landing-faq-a">Yes. ReadmeCraft is 100% free and open-source under the MIT License. There are no paywalls, premium tiers, accounts, or subscriptions required.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">Is my GitHub Personal Access Token safe with ReadmeCraft?</h3>
           <p class="landing-faq-a">Yes, completely safe. ReadmeCraft runs 100% in your browser. Personal Access Tokens are held exclusively in volatile RAM during the direct HTTPS request to api.github.com and are immediately cleared when the publish modal closes. Tokens are never saved to localStorage, cookies, or any remote server.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">How does ReadmeCraft compare to other GitHub profile README generators?</h3>
           <p class="landing-faq-a">Unlike older generators, ReadmeCraft offers a dual real-time GitHub Dark and Light preview, 375px mobile responsiveness testing, 65+ modern tech badges, competitive programming platforms (LeetCode, Codeforces), 1-click GitHub commit publishing, ASCII banner generation, completeness linting, and guaranteed zero-server privacy.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">Can I preview how my GitHub README looks on mobile devices?</h3>
           <p class="landing-faq-a">Yes. ReadmeCraft features a dedicated 375px mobile simulation frame inside the editor, enabling you to verify badge wrapping, card scaling, and table readability on mobile screens before publishing.</p>
         </div>
 
-        <div class="landing-faq-item">
+        <div class="landing-faq-item reveal-on-scroll">
           <h3 class="landing-faq-q">Does ReadmeCraft comply with privacy laws like GDPR and India's DPDP Act?</h3>
           <p class="landing-faq-a">Yes. ReadmeCraft operates under a zero-server data processing model with zero persistent cookies and zero user tracking databases, complying fully with the Digital Personal Data Protection Act (DPDP), 2023 of India and European Union GDPR standards.</p>
         </div>
@@ -809,12 +815,12 @@
     </section>
 
     <!-- Final Call to Action Banner -->
-    <div class="landing-cta-banner">
+    <div class="landing-cta-banner reveal-on-scroll">
       <h2 style="font-size: var(--font-size-xl); font-weight: 700; color: var(--color-text-primary);">Ready to upgrade your GitHub profile?</h2>
       <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); max-width: 520px;">
         Join thousands of software engineers using ReadmeCraft to build calm, professional profile READMEs in minutes.
       </p>
-      <a href="editor.html" class="btn btn--primary" style="padding: 10px 22px; font-size: var(--font-size-sm); margin-top: var(--space-2);">
+      <a href="editor.html" class="btn btn--primary btn--animated-gradient" style="padding: 10px 22px; font-size: var(--font-size-sm); margin-top: var(--space-2);">
         Launch ReadmeCraft Editor →
       </a>
     </div>
@@ -864,6 +870,6 @@
   </div>
 
   <!-- Landing Page Script Bootstrap -->
-  <script type="module" src="src/ui/landing.js?v=1.0.3"></script>
+  <script type="module" src="src/ui/landing.js?v=1.1.1"></script>
 </body>
 </html>

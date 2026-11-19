@@ -1,0 +1,11 @@
+# Distribution Archives
+*.zip
+*.tar.gz
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Editor & Agent temporary directories
+.vscode/
+.idea/

@@ -387,5 +387,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initial render
   updateScreenVisibility(store.getState().hasStarted);
   preview.render(store.getState());
+
+  // Handle URL query parameters (?user=... or ?template=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const qTemplate = urlParams.get('template');
+  const qUser = urlParams.get('user');
+
+  if (qTemplate && TEMPLATES[qTemplate]) {
+    store.dispatch({ type: 'APPLY_TEMPLATE', payload: TEMPLATES[qTemplate] });
+    if (templateSelect) templateSelect.value = qTemplate;
+  }
+
+  if (qUser) {
+    handleGitHubPrefill(qUser);
+  }
+
+  // If on editor.html (no introScreen), ensure builder is started immediately
+  if (mainWorkspace && !introScreen) {
+    store.dispatch({ type: 'START_BUILDER' });
+  }
 });
 

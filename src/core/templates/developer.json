@@ -1,0 +1,23 @@
+{
+  "id": "developer",
+  "name": "Developer",
+  "description": "Standard engineering profile with active projects, tech stack badges, and GitHub activity.",
+  "enabledModules": ["header", "bio", "about_extras", "tech_stack", "pinned_repos", "stats", "socials"],
+  "moduleOverrides": {
+    "header": {
+      "alignment": "left",
+      "statusBadge": "Open to select open-source & technical advisory"
+    },
+    "tech_stack": {
+      "style": "badges",
+      "badgeTheme": "flat"
+    },
+    "stats": {
+      "theme": "github_dark",
+      "showStatsCard": true,
+      "showStreakCard": true,
+      "showTopLanguages": true
+    }
+  }
+}
+

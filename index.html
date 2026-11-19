@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' https://api.github.com blob:; worker-src 'self' blob:; media-src 'self' blob:; font-src 'self';">
+  <title>ReadmeCraft — GitHub Profile README Builder</title>
+  <meta name="description" content="A free, browser-only tool to build and publish professional GitHub profile READMEs with live preview and template presets.">
+  <link rel="icon" type="image/png" href="assets/favicon_dark.png" id="app-favicon">
+  <link rel="alternate icon" type="image/png" href="assets/favicon_light.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="src/styles/tokens.css">
+  <link rel="stylesheet" href="src/styles/base.css">
+  <link rel="stylesheet" href="src/styles/layout.css">
+  <link rel="stylesheet" href="src/styles/components.css">
+
+  <!-- Vendored Libraries (Pinned) -->
+  <script src="vendor/marked-15.0.7.min.js"></script>
+  <script src="vendor/dompurify-3.2.4.min.js"></script>
+</head>
+<body>
+  <div class="app-root" id="app">
+    <!-- Slim Top App Bar -->
+    <header class="app-header" role="banner">
+      <div class="header-brand">
+        <img src="assets/horizontal_lockup_white.png" alt="ReadmeCraft" class="brand-logo brand-logo--light" height="26">
+        <img src="assets/horizontal_lockup_dark.png" alt="ReadmeCraft" class="brand-logo brand-logo--dark" height="26">
+        <span class="brand-tag">v1</span>
+      </div>
+
+      <div class="header-controls" id="header-controls">
+        <!-- Template & Preset Dropdown -->
+        <label for="template-select" class="visually-hidden">Template</label>
+        <select id="template-select" class="form-select" style="width: auto; padding: 4px 8px; font-size: 13px;" title="Choose profile template">
+          <option value="minimal">Template: Minimal</option>
+          <option value="developer" selected>Template: Developer</option>
+          <option value="open_source">Template: Open Source</option>
+          <option value="freelancer">Template: Freelancer</option>
+          <option value="creator">Template: Creator</option>
+        </select>
+
+        <!-- Undo / Redo -->
+        <div class="btn-group" role="group" aria-label="History actions">
+          <button id="btn-undo" class="btn btn--icon btn--sm" title="Undo (Ctrl+Z)" aria-label="Undo" disabled>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 5.5H10a4 4 0 0 1 0 8H6a.75.75 0 0 1 0-1.5h4a2.5 2.5 0 0 0 0-5H4.5v2.25L1.75 5 4.5 2.75V5.5z"/>
+            </svg>
+          </button>
+          <button id="btn-redo" class="btn btn--icon btn--sm" title="Redo (Ctrl+Y)" aria-label="Redo" disabled>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M11.5 5.5H6a4 4 0 0 0 0 8h4a.75.75 0 0 0 0-1.5H6a2.5 2.5 0 0 1 0-5h5.5v2.25L14.25 5 11.5 2.75V5.5z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Quality Completeness Indicator -->
+        <button id="quality-trigger" class="quality-badge quality-badge--high" title="Review profile quality audit" aria-label="Profile quality score">
+          <span id="quality-score">100%</span>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <!-- Dark/Light Theme Toggle -->
+        <button id="theme-toggle" class="btn btn--icon btn--subtle" title="Toggle theme (System / Dark / Light)" aria-label="Toggle theme">
+          <svg id="theme-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0zm0 13a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13zM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.75.75 0 0 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 0-1.06zm9.193 9.193a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061zM0 8a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H.75A.75.75 0 0 1 0 8zm13 0a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 13 8zM2.343 13.657a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.062 1.06l-1.061 1.061a.75.75 0 0 1-1.061 0zm9.193-9.193a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 1 1 1.062 1.06l-1.061 1.061a.75.75 0 0 1-1.061 0z"/>
+          </svg>
+        </button>
+
+        <!-- Export Dropdown -->
+        <div style="position: relative;">
+          <button id="btn-export-menu" class="btn" aria-haspopup="true" aria-expanded="false" title="Export markdown">
+            <span>Export</span>
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M4.427 6.427l3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 6H4.604a.25.25 0 0 0-.177.427z"/>
+            </svg>
+          </button>
+          <div id="export-dropdown" class="modal-dialog" style="position: absolute; right: 0; top: calc(100% + 4px); width: 200px; display: none; z-index: 50; padding: 4px; box-shadow: var(--shadow-md);">
+            <button id="btn-copy-md" class="btn btn--subtle" style="width: 100%; justify-content: flex-start;">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25v-7.5z"/>
+                <path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25v-7.5zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-7.5z"/>
+              </svg>
+              Copy Markdown
+            </button>
+            <button id="btn-download-md" class="btn btn--subtle" style="width: 100%; justify-content: flex-start;">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14H2.75z"/>
+                <path d="M7.25 1.75v7.69L4.47 6.66a.75.75 0 0 0-1.06 1.06l4.06 4.06a.75.75 0 0 0 1.06 0l4.06-4.06a.75.75 0 1 0-1.06-1.06L8.75 9.44V1.75a.75.75 0 0 0-1.5 0z"/>
+              </svg>
+              Download README.md
+            </button>
+          </div>
+        </div>
+
+        <!-- Publish to GitHub Button -->
+        <button id="btn-publish-open" class="btn btn--primary" title="Publish directly to username/username repository">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8z"/>
+          </svg>
+          Publish
+        </button>
+      </div>
+    </header>
+
+    <!-- Introductory Landing View (shown before user starts) -->
+    <main id="intro-screen" class="intro-screen" role="main">
+      <div class="intro-card">
+        <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-1);">
+          <img src="assets/icon_white.png" alt="ReadmeCraft" width="36" height="36" style="border-radius: var(--radius-md);">
+          <span style="font-weight: 600; font-size: 15px; color: var(--color-text-secondary); letter-spacing: -0.01em;">ReadmeCraft</span>
+        </div>
+        <div class="intro-header">
+          <h1 class="intro-title">Build a GitHub profile README that looks like you built it.</h1>
+          <p class="intro-description">
+            Free, in-browser editor with live GitHub preview, professional templates, toggleable sections, and one-click publishing to your profile repo.
+          </p>
+        </div>
+
+        <form id="intro-github-form" class="intro-form">
+          <div class="form-group">
+            <label for="intro-username-input" class="form-label">
+              <span>Enter your GitHub username to pre-fill</span>
+              <span class="form-label-desc">Optional</span>
+            </label>
+            <div style="display: flex; gap: var(--space-2);">
+              <input type="text" id="intro-username-input" class="form-input" placeholder="e.g. torvalds" autocomplete="username" spellcheck="false">
+              <button type="submit" id="btn-prefill-submit" class="btn btn--primary">
+                Import Profile
+              </button>
+            </div>
+            <p id="prefill-status" class="form-hint">Fetches public profile and top repositories via unauthenticated GitHub API.</p>
+          </div>
+
+          <div class="form-group" style="margin-top: var(--space-2);">
+            <span class="form-label">Or start with a curated template</span>
+            <div class="intro-preset-grid">
+              <button type="button" class="btn btn-template-card" data-template="developer">
+                <strong>Developer</strong>
+                <span class="form-hint">Stack, repos, stats</span>
+              </button>
+              <button type="button" class="btn btn-template-card" data-template="minimal">
+                <strong>Minimal</strong>
+                <span class="form-hint">Clean, text-first</span>
+              </button>
+              <button type="button" class="btn btn-template-card" data-template="open_source">
+                <strong>Open Source</strong>
+                <span class="form-hint">Contributions, projects</span>
+              </button>
+              <button type="button" class="btn btn-template-card" data-template="freelancer">
+                <strong>Freelancer</strong>
+                <span class="form-hint">Services, contact</span>
+              </button>
+              <button type="button" class="btn btn-template-card" data-template="creator">
+                <strong>Creator</strong>
+                <span class="form-hint">Content, community</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="intro-footer-note">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 3.75a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 1.5 0v-3.5z"/>
+            </svg>
+            <span>No account required. Runs 100% in your browser. Drafts saved locally.</span>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Main Workspace (Desktop 3-Column / Mobile Tabbed) -->
+    <div id="main-workspace" class="workspace" style="display: none;" role="main">
+      <!-- Left Column: Module List & Order -->
+      <aside class="pane-modules active-tab" id="pane-modules" aria-label="Profile Modules">
+        <div class="pane-header">
+          <span class="pane-title" id="module-count-label">Modules (0/0)</span>
+          <div style="display: flex; gap: var(--space-1);">
+            <button id="btn-preset-pro" class="btn btn--sm" title="Apply recommended professional module selection">Professional</button>
+            <button id="btn-preset-clear" class="btn btn--sm btn--subtle" title="Untick all modules">Clear all</button>
+          </div>
+        </div>
+
+        <div class="pane-body">
+          <ul class="module-list" id="module-list-container" role="list">
+            <!-- Dynamic module items rendered by src/ui/components/module-list.js -->
+          </ul>
+          <div id="module-warning-box" class="module-limit-warning" style="display: none;" role="alert">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="margin-top: 1px;">
+              <path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575L6.457 1.047zM8 10.93a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zm-.8-5.93l.2 4h1.2l.2-4h-1.6z"/>
+            </svg>
+            <span>More than 8 modules active. Profiles with 4–7 focused modules have higher engagement.</span>
+          </div>
+        </div>
+
+        <div class="pane-footer">
+          <div class="form-group">
+            <label for="workspace-username-input" class="form-label" style="font-size: var(--font-size-xs);">
+              GitHub Username
+            </label>
+            <div style="display: flex; gap: var(--space-1);">
+              <input type="text" id="workspace-username-input" class="form-input" style="padding: 4px 8px; font-size: 13px;" placeholder="Username" spellcheck="false">
+              <button id="btn-workspace-refresh-gh" class="btn btn--sm" title="Refresh public data from GitHub">Sync</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Middle Column: Active Module Settings Editor -->
+      <section class="pane-editor" id="pane-editor" aria-label="Module Settings Editor">
+        <div class="editor-header">
+          <div style="display: flex; align-items: center; gap: var(--space-2);">
+            <h2 id="active-module-title" style="font-size: var(--font-size-md);">Module Settings</h2>
+            <span id="active-module-badge" class="brand-tag">Active</span>
+          </div>
+          <label class="form-checkbox-label" title="Enable or disable this section in the README output">
+            <input type="checkbox" id="active-module-toggle" class="form-checkbox">
+            <span style="font-size: var(--font-size-xs);">Include in README</span>
+          </label>
+        </div>
+
+        <div class="editor-body" id="editor-form-container">
+          <!-- Dynamic form inputs rendered by src/ui/components/module-editor.js -->
+        </div>
+      </section>
+
+      <!-- Right Column: Live Preview & Markdown Source -->
+      <section class="pane-preview" id="pane-preview" aria-label="Profile Preview">
+        <div class="preview-toolbar">
+          <div class="tabs" role="tablist" aria-label="Preview display modes">
+            <button id="tab-btn-preview" class="tab-btn active" role="tab" aria-selected="true" aria-controls="preview-body-container">
+              Preview
+            </button>
+            <button id="tab-btn-raw" class="tab-btn" role="tab" aria-selected="false" aria-controls="raw-source-container">
+              Markdown
+            </button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: var(--space-2);">
+            <!-- GitHub Theme Simulator (Light / Dark) -->
+            <div class="btn-group" role="group" aria-label="GitHub theme preview">
+              <button id="btn-gh-light" class="btn btn--sm" title="Preview on GitHub Light mode">Light</button>
+              <button id="btn-gh-dark" class="btn btn--sm active" title="Preview on GitHub Dark mode">Dark</button>
+            </div>
+
+            <!-- Viewport width (Full / 375px Mobile) -->
+            <button id="btn-toggle-viewport" class="btn btn--sm" title="Toggle 375px mobile container preview" aria-pressed="false">
+              Mobile width
+            </button>
+          </div>
+        </div>
+
+        <div class="preview-viewport">
+          <div id="preview-container" class="preview-container preview-dark">
+            <!-- Formatted Markdown Render -->
+            <article id="preview-body-container" class="markdown-body" role="tabpanel" aria-label="Rendered Markdown Preview">
+              <!-- Rendered by src/ui/preview.js -->
+            </article>
+
+            <!-- Raw Markdown Source Textarea -->
+            <div id="raw-source-container" style="display: none; height: 100%;" role="tabpanel" aria-label="Raw Markdown Source">
+              <textarea id="raw-markdown-textarea" class="markdown-source-view" readonly spellcheck="false"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Mobile Navigation Tab Bar (screen width < 900px) -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile workspace view tabs">
+      <button class="mobile-nav-btn active" data-tab="pane-modules">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/>
+        </svg>
+        <span>Modules</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="pane-editor">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.929-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.61zm1.414 1.06a.25.25 0 0 0-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 0 0 0-.354l-1.086-1.086zM10.28 4.28L3.97 10.59a.25.25 0 0 0-.064.108l-.558 1.953 1.953-.558a.249.249 0 0 0 .108-.064l6.31-6.31-1.44-1.44z"/>
+        </svg>
+        <span>Editor</span>
+      </button>
+      <button class="mobile-nav-btn" data-tab="pane-preview">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 2c1.981 0 3.67.992 4.933 2.078 1.27 1.091 2.187 2.345 2.637 3.023a1.62 1.62 0 0 1 0 1.798c-.45.678-1.367 1.932-2.637 3.023C11.67 13.008 9.981 14 8 14c-1.981 0-3.67-.992-4.933-2.078C1.797 10.83.88 9.576.43 8.898a1.62 1.62 0 0 1 0-1.798c.45-.677 1.367-1.931 2.637-3.022C4.33 2.992 6.019 2 8 2zm0 1.5c-1.622 0-3.064.81-4.148 1.742C2.793 6.155 2.008 7.24 1.67 7.75a.12.12 0 0 0 0 .5c.338.51 1.123 1.595 2.182 2.508C4.936 11.69 6.378 12.5 8 12.5c1.622 0 3.064-.81 4.148-1.742 1.059-.913 1.844-1.998 2.182-2.508a.12.12 0 0 0 0-.5c-.338-.51-1.123-1.595-2.182-2.508C11.064 4.31 9.622 3.5 8 3.5zM8 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+        </svg>
+        <span>Preview</span>
+      </button>
+    </nav>
+
+    <!-- Publish Modal Dialog -->
+    <div id="publish-modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="publish-modal-title">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2 id="publish-modal-title" class="modal-title">Publish to GitHub Profile</h2>
+          <button id="btn-publish-modal-close" class="btn btn--icon btn--subtle" aria-label="Close dialog">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/>
+            </svg>
+          </button>
+        </div>
+        <form id="publish-form" class="modal-body" onsubmit="return false;">
+          <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+            Commits your current README.md directly to your special repository <code id="publish-repo-target">username/username</code>.
+          </p>
+
+          <div class="security-note">
+            <strong>Security & Privacy:</strong>
+            <p style="margin-top: 4px;">
+              Your Personal Access Token is held in browser memory only during this operation and is <strong>never saved to localStorage, logged, or sent to any server</strong> other than <code>api.github.com</code>.
+            </p>
+            <p style="margin-top: 4px;">
+              Required scope: <strong>Fine-grained Personal Access Token</strong> with <code>Contents: Read and write</code> and <code>Administration: Read and write</code> (only needed if creating the repository for the first time), or classic token with <code>repo</code> scope.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="publish-token-input" class="form-label">
+              GitHub Personal Access Token (PAT)
+            </label>
+            <input type="password" id="publish-token-input" class="form-input" placeholder="github_pat_... or ghp_..." autocomplete="current-password" spellcheck="false">
+          </div>
+
+          <div class="form-group">
+            <label for="publish-commit-msg" class="form-label">
+              Commit Message
+            </label>
+            <input type="text" id="publish-commit-msg" class="form-input" value="docs: update profile README.md">
+          </div>
+
+          <div id="publish-status-box" style="display: none; padding: 10px; border-radius: 6px; font-size: 13px;"></div>
+        </form>
+        <div class="modal-footer">
+          <button id="btn-publish-cancel" class="btn btn--subtle">Cancel</button>
+          <button id="btn-publish-submit" class="btn btn--primary">Publish README</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quality Audit Modal Dialog -->
+    <div id="quality-modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="quality-modal-title">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2 id="quality-modal-title" class="modal-title">Profile Quality Audit</h2>
+          <button id="btn-quality-modal-close" class="btn btn--icon btn--subtle" aria-label="Close dialog">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="display: flex; align-items: baseline; gap: var(--space-2);">
+            <span style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold);" id="quality-modal-score">100%</span>
+            <span style="color: var(--color-text-secondary); font-size: var(--font-size-sm);">Completeness & Best Practices Score</span>
+          </div>
+          <p style="font-size: var(--font-size-xs); color: var(--color-text-muted);">
+            This score evaluates section balance, link formatting, image accessibility, and length. It is strictly an authoring aid and is never included in your README output.
+          </p>
+          <div id="quality-warnings-list" style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-quality-modal-ok" class="btn btn--primary">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+  </div>
+
+  <!-- Main ES Module Bootstrap -->
+  <script type="module" src="src/ui/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+{
+  "id": "open_source",
+  "name": "Open Source",
+  "description": "Tailored for OSS maintainers and active contributors with repo showcases and sponsorship.",
+  "enabledModules": ["header", "bio", "pinned_repos", "about_extras", "tech_stack", "stats", "custom_markdown", "socials"],
+  "moduleOverrides": {
+    "header": {
+      "alignment": "left",
+      "statusBadge": "Maintaining open-source infrastructure tools"
+    },
+    "custom_markdown": {
+      "title": "Supporting My Work",
+      "content": "All my core tools are MIT-licensed and free for everyone. If my software powers your workflow or company infrastructure, consider [sponsoring my work on GitHub Sponsors](https://github.com/sponsors)."
+    },
+    "stats": {
+      "theme": "github_dark",
+      "showStatsCard": true,
+      "showStreakCard": false,
+      "showTopLanguages": true
+    }
+  }
+}
+

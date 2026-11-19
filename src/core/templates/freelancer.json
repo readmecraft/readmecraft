@@ -1,0 +1,24 @@
+{
+  "id": "freelancer",
+  "name": "Freelancer",
+  "description": "Oriented towards contracting, freelance engineering, deliverables showcase, and client contact.",
+  "enabledModules": ["header", "bio", "custom_markdown", "tech_stack", "pinned_repos", "contact", "socials", "quote"],
+  "moduleOverrides": {
+    "header": {
+      "alignment": "left",
+      "statusBadge": "Available for contract engineering (Q1/Q2)"
+    },
+    "custom_markdown": {
+      "title": "Services & Consulting",
+      "content": "- **Architecture Audits**: Web performance, bundle optimization, security review.\n- **Full-Stack Development**: Modern web applications, API design, high-concurrency systems.\n- **Migration**: Legacy modernization, TypeScript conversions, cloud infrastructure."
+    },
+    "contact": {
+      "note": "For project scopes, availability, and rate cards, reach out directly via email with a brief summary of requirements."
+    },
+    "quote": {
+      "quote": "Good tools empower people to do their best work.",
+      "author": "Anonymous Lead"
+    }
+  }
+}
+

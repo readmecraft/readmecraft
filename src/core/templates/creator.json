@@ -1,0 +1,29 @@
+{
+  "id": "creator",
+  "name": "Creator",
+  "description": "Built for developer advocates, writers, and technical community creators.",
+  "enabledModules": ["header", "bio", "custom_markdown", "tech_stack", "pinned_repos", "socials", "contact", "quote"],
+  "moduleOverrides": {
+    "header": {
+      "alignment": "center",
+      "statusBadge": "Sharing engineering deep-dives & tutorials"
+    },
+    "custom_markdown": {
+      "title": "Recent Writing & Talks",
+      "content": "- 📝 [Understanding Browser Event Loops](https://example.com/blog/event-loop)\n- 🎥 [Building Zero-Overhead Web Apps from Scratch](https://youtube.com)\n- 🎙️ [Podcast: Systems Design for Pragmatic Developers](https://example.com/podcast)"
+    },
+    "socials": {
+      "links": [
+        { "platform": "YouTube", "url": "https://youtube.com", "label": "YouTube" },
+        { "platform": "Website", "url": "https://example.com", "label": "Technical Blog" },
+        { "platform": "Twitter", "url": "https://x.com", "label": "X / Twitter" },
+        { "platform": "LinkedIn", "url": "https://linkedin.com", "label": "LinkedIn" }
+      ]
+    },
+    "quote": {
+      "quote": "The most effective way to understand architecture is to build it.",
+      "author": "Systems Engineer"
+    }
+  }
+}
+

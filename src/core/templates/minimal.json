@@ -1,0 +1,22 @@
+{
+  "id": "minimal",
+  "name": "Minimal",
+  "description": "Quiet, text-first, high signal-to-noise ratio. No bloated widgets.",
+  "enabledModules": ["header", "bio", "about_extras", "tech_stack", "pinned_repos", "contact"],
+  "moduleOverrides": {
+    "header": {
+      "alignment": "left",
+      "bannerType": "none",
+      "statusBadge": ""
+    },
+    "tech_stack": {
+      "style": "list"
+    },
+    "stats": {
+      "showStatsCard": false,
+      "showStreakCard": false,
+      "showTopLanguages": true
+    }
+  }
+}
+

@@ -263,11 +263,11 @@
   <link rel="alternate icon" type="image/png" href="assets/favicon_light.png">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="src/styles/tokens.css">
-  <link rel="stylesheet" href="src/styles/base.css">
-  <link rel="stylesheet" href="src/styles/layout.css">
-  <link rel="stylesheet" href="src/styles/components.css">
-  <link rel="stylesheet" href="src/styles/animations.css">
+  <link rel="stylesheet" href="src/styles/tokens.css?v=1.2.0">
+  <link rel="stylesheet" href="src/styles/base.css?v=1.2.0">
+  <link rel="stylesheet" href="src/styles/layout.css?v=1.2.0">
+  <link rel="stylesheet" href="src/styles/components.css?v=1.2.0">
+  <link rel="stylesheet" href="src/styles/animations.css?v=1.2.0">
 
   <!-- Vendored Libraries (Pinned) -->
   <script src="vendor/marked-15.0.7.min.js"></script>
@@ -519,64 +519,205 @@
         </p>
       </div>
 
-      <div class="comparison-table-wrapper reveal-on-scroll">
+      <div class="comparison-card-container reveal-on-scroll">
         <table class="comparison-table" aria-label="Feature comparison matrix">
           <thead>
             <tr>
-              <th scope="col" style="min-width: 180px;">Capability</th>
-              <th scope="col" style="color: var(--color-accent); font-weight: 700;">ReadmeCraft</th>
-              <th scope="col">Legacy Generators</th>
-              <th scope="col">Manual Markdown</th>
+              <th scope="col" style="min-width: 170px;">Capability</th>
+              <th scope="col" class="readme-col-highlight" style="min-width: 220px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                  <span>ReadmeCraft</span>
+                  <span class="brand-tag">Recommended</span>
+                </div>
+              </th>
+              <th scope="col" style="min-width: 170px;">Legacy Generators</th>
+              <th scope="col" style="min-width: 150px;">Manual Markdown</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">Live Dark &amp; Light Preview</th>
-              <td><span class="badge-check">✓ Real-time GitHub match</span></td>
-              <td><span class="badge-cross">✗ Single-theme or static</span></td>
-              <td><span class="badge-cross">✗ Push to check</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">Live Dark &amp; Light Preview</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Real-time GitHub match
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Single-theme or static
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Push to check
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">Mobile 375px Simulation</th>
-              <td><span class="badge-check">✓ Dedicated container</span></td>
-              <td><span class="badge-cross">✗ Not available</span></td>
-              <td><span class="badge-cross">✗ Not available</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">Mobile 375px Simulation</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Dedicated frame container
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Not available
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Not available
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">65+ Tech Stack Badges</th>
-              <td><span class="badge-check">✓ Devicons &amp; Shields.io</span></td>
-              <td><span class="badge-cross">✗ Outdated static icons</span></td>
-              <td><span class="badge-cross">✗ Manual copy-pasting</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">65+ Tech Stack Badges</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Devicons &amp; Shields.io
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Outdated static icons
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Manual copy-pasting
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">Coding Profiles (LeetCode, etc.)</th>
-              <td><span class="badge-check">✓ 23+ platforms</span></td>
-              <td><span class="badge-cross">✗ Limited / Generic only</span></td>
-              <td><span class="badge-cross">✗ Manual Markdown</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">Coding Profiles &amp; Socials</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  LeetCode, Codeforces, 23+
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Limited / Generic only
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Manual Markdown
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">1-Click Publish to GitHub</th>
-              <td><span class="badge-check">✓ Direct REST API commit</span></td>
-              <td><span class="badge-cross">✗ Copy text only</span></td>
-              <td><span class="badge-cross">✗ Git CLI terminal</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">1-Click Publish to GitHub</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Direct REST API commit
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Copy text only
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Git CLI terminal
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">Monospace ASCII Art Generator</th>
-              <td><span class="badge-check">✓ Built-in text &amp; images</span></td>
-              <td><span class="badge-cross">✗ Not available</span></td>
-              <td><span class="badge-cross">✗ External tools</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">Monospace ASCII Art Banners</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Built-in text &amp; images
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Not available
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  External tools
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">Completeness &amp; Quality Linting</th>
-              <td><span class="badge-check">✓ Live scoring &amp; audit</span></td>
-              <td><span class="badge-cross">✗ Not available</span></td>
-              <td><span class="badge-cross">✗ Not available</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">Completeness &amp; Quality Audit</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Live scoring &amp; linting
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Not available
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Not available
+                </span>
+              </td>
             </tr>
             <tr>
-              <th scope="row">Privacy &amp; DPDP / GDPR Model</th>
-              <td><span class="badge-check">✓ 100% In-memory, 0 server</span></td>
-              <td><span class="badge-cross">✗ Variable</span></td>
-              <td><span class="badge-check">✓ Local machine</span></td>
+              <th scope="row">
+                <span class="matrix-feature-name">Privacy (DPDP &amp; GDPR)</span>
+              </th>
+              <td class="readme-col-highlight">
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  100% In-memory, 0 server
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--cross">
+                  <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>
+                  Variable
+                </span>
+              </td>
+              <td>
+                <span class="matrix-badge matrix-badge--check">
+                  <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+                  Local machine
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -696,41 +837,53 @@
 
       <div class="best-practices-grid">
         <article class="best-practice-card reveal-on-scroll">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215z"/></svg>
-            1. Keep the Hero Punchy
-          </h3>
-          <p>
+          <div class="best-practice-header">
+            <div class="best-practice-icon-box">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215z"/></svg>
+            </div>
+            <span class="best-practice-badge">TIP 01</span>
+          </div>
+          <h3 class="best-practice-title">Keep the Hero Punchy</h3>
+          <p class="best-practice-text">
             Tech recruiters spend an average of 15 seconds skimming a profile. Introduce your core role, current projects, and primary focus in 2-3 sentences before listing badges.
           </p>
         </article>
 
         <article class="best-practice-card reveal-on-scroll">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/></svg>
-            2. Curate, Don't Overcrowd
-          </h3>
-          <p>
+          <div class="best-practice-header">
+            <div class="best-practice-icon-box">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75zM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5z"/></svg>
+            </div>
+            <span class="best-practice-badge">TIP 02</span>
+          </div>
+          <h3 class="best-practice-title">Curate, Don't Overcrowd</h3>
+          <p class="best-practice-text">
             Avoid listing every tool you touched once in university. Group your active production skills under clear subheadings: Languages, Frameworks, Cloud &amp; DevOps, and Databases.
           </p>
         </article>
 
         <article class="best-practice-card reveal-on-scroll">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 3.75a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 1.5 0v-3.5z"/></svg>
-            3. Show Dynamic Proof-of-Work
-          </h3>
-          <p>
+          <div class="best-practice-header">
+            <div class="best-practice-icon-box">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25 3.75a.75.75 0 0 0-1.5 0v3.5a.75.75 0 0 0 1.5 0v-3.5z"/></svg>
+            </div>
+            <span class="best-practice-badge">TIP 03</span>
+          </div>
+          <h3 class="best-practice-title">Show Dynamic Proof-of-Work</h3>
+          <p class="best-practice-text">
             A high contribution streak counter and top languages chart provide authentic proof of consistent coding habits. Pair these with 2-3 pinned featured repositories that solve real problems.
           </p>
         </article>
 
         <article class="best-practice-card reveal-on-scroll">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.75 0a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 3.75 0zM10.25 6a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zM2 13.5a2 2 0 0 1 2-2h3.5a2 2 0 0 1 2 2v1.75a.75.75 0 0 1-.75.75H2.75a.75.75 0 0 1-.75-.75V13.5z"/></svg>
-            4. Verify Mobile &amp; Light Themes
-          </h3>
-          <p>
+          <div class="best-practice-header">
+            <div class="best-practice-icon-box">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M3.75 0a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 3.75 0zM10.25 6a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5zM2 13.5a2 2 0 0 1 2-2h3.5a2 2 0 0 1 2 2v1.75a.75.75 0 0 1-.75.75H2.75a.75.75 0 0 1-.75-.75V13.5z"/></svg>
+            </div>
+            <span class="best-practice-badge">TIP 04</span>
+          </div>
+          <h3 class="best-practice-title">Verify Mobile &amp; Light Themes</h3>
+          <p class="best-practice-text">
             Over 40% of GitHub views occur on mobile devices or in GitHub's default Light theme. Test badge contrast and table wrapping using ReadmeCraft's dual-theme and 375px preview tools.
           </p>
         </article>

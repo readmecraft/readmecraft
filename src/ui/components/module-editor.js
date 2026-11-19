@@ -5,6 +5,7 @@
  */
 
 import { generateTextBanner, processImageToAscii, buildAnimatedAsciiSvg, CHARSETS } from '../../core/ascii.js';
+import { SKILLS_LIST, SKILL_CATEGORIES, findSkill } from '../../core/skills-catalog.js';
 
 export class ModuleEditorComponent {
   constructor(store) {
@@ -219,18 +220,33 @@ export class ModuleEditorComponent {
   renderTechStackForm(data) {
     const parseList = (str) => str.split(',').map(s => s.trim()).filter(Boolean);
 
+    const languages = Array.isArray(data.languages) ? [...data.languages] : [];
+    const frameworks = Array.isArray(data.frameworks) ? [...data.frameworks] : [];
+    const databases = Array.isArray(data.databases) ? [...data.databases] : [];
+    const tools = Array.isArray(data.tools) ? [...data.tools] : [];
+
+    const allSelectedNames = new Set([
+      ...languages.map(s => s.toLowerCase()),
+      ...frameworks.map(s => s.toLowerCase()),
+      ...databases.map(s => s.toLowerCase()),
+      ...tools.map(s => s.toLowerCase())
+    ]);
+
+    const totalSelected = languages.length + frameworks.length + databases.length + tools.length;
+
     this.formContainer.innerHTML = `
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="tech-style">Display Format</label>
           <select id="tech-style" class="form-select">
-            <option value="badges" ${data.style === 'badges' ? 'selected' : ''}>Shields Badges (Standard)</option>
+            <option value="badges" ${data.style === 'badges' ? 'selected' : ''}>Shields Badges (Color themed)</option>
+            <option value="icons" ${data.style === 'icons' ? 'selected' : ''}>Vector Icons (Original Logos)</option>
             <option value="list" ${data.style === 'list' ? 'selected' : ''}>Plain Bullet List (Minimal)</option>
           </select>
         </div>
         <div class="form-group">
           <label class="form-label" for="tech-theme">Badge Style</label>
-          <select id="tech-theme" class="form-select">
+          <select id="tech-theme" class="form-select" ${data.style === 'icons' || data.style === 'list' ? 'disabled' : ''}>
             <option value="flat" ${data.badgeTheme === 'flat' ? 'selected' : ''}>Flat</option>
             <option value="flat-square" ${data.badgeTheme === 'flat-square' ? 'selected' : ''}>Flat Square</option>
             <option value="for-the-badge" ${data.badgeTheme === 'for-the-badge' ? 'selected' : ''}>For The Badge</option>
@@ -238,33 +254,245 @@ export class ModuleEditorComponent {
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="tech-langs">Languages (comma separated)</label>
-        <input type="text" id="tech-langs" class="form-input" value="${(data.languages || []).join(', ')}" placeholder="TypeScript, Go, Python, Rust">
+      <!-- Interactive Skill Picker with Icons -->
+      <div class="skill-picker-container">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);">
+          <div style="display: flex; align-items: baseline; gap: var(--space-2);">
+            <strong style="font-size: var(--font-size-sm);">Skill & Technology Picker</strong>
+            <span class="brand-tag" id="skill-count-badge">${totalSelected} selected</span>
+          </div>
+          <button type="button" id="btn-clear-skills" class="btn btn--sm btn--subtle" title="Clear all selected skills">Clear</button>
+        </div>
+
+        <div class="skill-filter-bar">
+          <input type="text" id="skill-search-input" class="form-input" style="padding: 4px 8px; font-size: 12px;" placeholder="Search 60+ skills... (e.g. React, Python, Docker)" autocomplete="off">
+        </div>
+
+        <div class="skill-category-chips" id="skill-category-filters">
+          <button type="button" class="skill-cat-chip active" data-cat="all">All</button>
+          ${SKILL_CATEGORIES.map(cat => `
+            <button type="button" class="skill-cat-chip" data-cat="${cat.id}">${cat.label}</button>
+          `).join('')}
+        </div>
+
+        <div class="skill-grid" id="skill-picker-grid">
+          ${SKILLS_LIST.map(skill => {
+            const isSelected = allSelectedNames.has(skill.name.toLowerCase());
+            return `
+              <div class="skill-card ${isSelected ? 'selected' : ''}" data-id="${skill.id}" data-name="${skill.name}" data-category="${skill.category}" tabindex="0" role="checkbox" aria-checked="${isSelected}">
+                <img src="${skill.icon}" alt="" class="skill-card-icon" loading="lazy" aria-hidden="true">
+                <span class="skill-card-name">${skill.name}</span>
+                <span class="skill-card-check">✓</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Add Custom Skill -->
+        <div style="display: flex; gap: var(--space-2); align-items: center; padding-top: var(--space-2); border-top: 1px solid var(--color-border-muted);">
+          <input type="text" id="custom-skill-input" class="form-input" style="flex: 1; padding: 4px 8px; font-size: 12px;" placeholder="Add unlisted skill (e.g. Astro, WebGPU, Tauri)">
+          <select id="custom-skill-category" class="form-select" style="width: 130px; padding: 4px 6px; font-size: 12px;">
+            <option value="languages">Language</option>
+            <option value="frontend" selected>Frontend</option>
+            <option value="backend">Backend</option>
+            <option value="database">Database</option>
+            <option value="tools">Tool / Cloud</option>
+          </select>
+          <button type="button" id="btn-add-custom-skill" class="btn btn--sm">+ Add</button>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="tech-frameworks">Frameworks & Libraries (comma separated)</label>
-        <input type="text" id="tech-frameworks" class="form-input" value="${(data.frameworks || []).join(', ')}" placeholder="React, Next.js, Node.js, FastAPI">
-      </div>
+      <!-- Advanced Manual Comma-separated Lists (collapsible / direct access) -->
+      <details style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--space-2);">
+        <summary style="cursor: pointer; font-weight: var(--font-weight-medium); user-select: none;">
+          Manual Text Inputs
+        </summary>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding-top: var(--space-3);">
+          <div class="form-group">
+            <label class="form-label" for="tech-langs">Languages (comma separated)</label>
+            <input type="text" id="tech-langs" class="form-input" value="${languages.join(', ')}">
+          </div>
 
-      <div class="form-group">
-        <label class="form-label" for="tech-dbs">Databases & Storage (comma separated)</label>
-        <input type="text" id="tech-dbs" class="form-input" value="${(data.databases || []).join(', ')}" placeholder="PostgreSQL, Redis, SQLite">
-      </div>
+          <div class="form-group">
+            <label class="form-label" for="tech-frameworks">Frameworks & Libraries (comma separated)</label>
+            <input type="text" id="tech-frameworks" class="form-input" value="${frameworks.join(', ')}">
+          </div>
 
-      <div class="form-group">
-        <label class="form-label" for="tech-tools">Tools & DevOps (comma separated)</label>
-        <input type="text" id="tech-tools" class="form-input" value="${(data.tools || []).join(', ')}" placeholder="Docker, Git, GitHub Actions, Linux">
-      </div>
+          <div class="form-group">
+            <label class="form-label" for="tech-dbs">Databases & Storage (comma separated)</label>
+            <input type="text" id="tech-dbs" class="form-input" value="${databases.join(', ')}">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tech-tools">Tools & DevOps (comma separated)</label>
+            <input type="text" id="tech-tools" class="form-input" value="${tools.join(', ')}">
+          </div>
+        </div>
+      </details>
     `;
 
-    document.getElementById('tech-style').addEventListener('change', (e) => this.updateData({ style: e.target.value }));
-    document.getElementById('tech-theme').addEventListener('change', (e) => this.updateData({ badgeTheme: e.target.value }));
-    document.getElementById('tech-langs').addEventListener('input', (e) => this.updateData({ languages: parseList(e.target.value) }));
-    document.getElementById('tech-frameworks').addEventListener('input', (e) => this.updateData({ frameworks: parseList(e.target.value) }));
-    document.getElementById('tech-dbs').addEventListener('input', (e) => this.updateData({ databases: parseList(e.target.value) }));
-    document.getElementById('tech-tools').addEventListener('input', (e) => this.updateData({ tools: parseList(e.target.value) }));
+    // 1. Format controls
+    const styleSelect = document.getElementById('tech-style');
+    const themeSelect = document.getElementById('tech-theme');
+
+    styleSelect?.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (themeSelect) themeSelect.disabled = val === 'icons' || val === 'list';
+      this.updateData({ style: val });
+    });
+
+    themeSelect?.addEventListener('change', (e) => {
+      this.updateData({ badgeTheme: e.target.value });
+    });
+
+    // 2. Search & Category filtering
+    const searchInput = document.getElementById('skill-search-input');
+    const catChips = document.querySelectorAll('.skill-cat-chip');
+    const skillCards = document.querySelectorAll('.skill-card');
+
+    let currentCat = 'all';
+    let currentFilter = '';
+
+    const applyFilter = () => {
+      skillCards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const cat = card.getAttribute('data-category');
+        const matchesCat = currentCat === 'all' || cat === currentCat;
+        const matchesSearch = !currentFilter || name.includes(currentFilter);
+        card.style.display = matchesCat && matchesSearch ? 'flex' : 'none';
+      });
+    };
+
+    searchInput?.addEventListener('input', (e) => {
+      currentFilter = e.target.value.trim().toLowerCase();
+      applyFilter();
+    });
+
+    catChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        catChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentCat = chip.getAttribute('data-cat');
+        applyFilter();
+      });
+    });
+
+    // 3. Card click selection toggle
+    const countBadge = document.getElementById('skill-count-badge');
+
+    const getTargetList = (cat) => {
+      if (cat === 'languages') return { list: languages, key: 'languages' };
+      if (cat === 'frontend' || cat === 'backend') return { list: frameworks, key: 'frameworks' };
+      if (cat === 'database') return { list: databases, key: 'databases' };
+      return { list: tools, key: 'tools' };
+    };
+
+    const toggleSkill = (card) => {
+      const name = card.getAttribute('data-name');
+      const cat = card.getAttribute('data-category');
+      const { list, key } = getTargetList(cat);
+
+      const existingIndex = list.findIndex(item => item.toLowerCase() === name.toLowerCase());
+
+      if (existingIndex >= 0) {
+        list.splice(existingIndex, 1);
+        card.classList.remove('selected');
+        card.setAttribute('aria-checked', 'false');
+      } else {
+        list.push(name);
+        card.classList.add('selected');
+        card.setAttribute('aria-checked', 'true');
+      }
+
+      const newTotal = languages.length + frameworks.length + databases.length + tools.length;
+      if (countBadge) countBadge.textContent = `${newTotal} selected`;
+
+      // Sync manual inputs
+      const langInput = document.getElementById('tech-langs');
+      const fwInput = document.getElementById('tech-frameworks');
+      const dbInput = document.getElementById('tech-dbs');
+      const toolInput = document.getElementById('tech-tools');
+      if (langInput) langInput.value = languages.join(', ');
+      if (fwInput) fwInput.value = frameworks.join(', ');
+      if (dbInput) dbInput.value = databases.join(', ');
+      if (toolInput) toolInput.value = tools.join(', ');
+
+      this.updateData({ [key]: [...list] });
+    };
+
+    skillCards.forEach(card => {
+      card.addEventListener('click', () => toggleSkill(card));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault();
+          toggleSkill(card);
+        }
+      });
+    });
+
+    // 4. Clear all skills
+    document.getElementById('btn-clear-skills')?.addEventListener('click', () => {
+      languages.length = 0;
+      frameworks.length = 0;
+      databases.length = 0;
+      tools.length = 0;
+
+      skillCards.forEach(card => {
+        card.classList.remove('selected');
+        card.setAttribute('aria-checked', 'false');
+      });
+
+      if (countBadge) countBadge.textContent = '0 selected';
+
+      const langInput = document.getElementById('tech-langs');
+      const fwInput = document.getElementById('tech-frameworks');
+      const dbInput = document.getElementById('tech-dbs');
+      const toolInput = document.getElementById('tech-tools');
+      if (langInput) langInput.value = '';
+      if (fwInput) fwInput.value = '';
+      if (dbInput) dbInput.value = '';
+      if (toolInput) toolInput.value = '';
+
+      this.updateData({
+        languages: [],
+        frameworks: [],
+        databases: [],
+        tools: []
+      });
+    });
+
+    // 5. Add custom skill
+    const customInput = document.getElementById('custom-skill-input');
+    const customCatSelect = document.getElementById('custom-skill-category');
+    const addCustomBtn = document.getElementById('btn-add-custom-skill');
+
+    const handleAddCustom = () => {
+      const val = customInput?.value.trim();
+      if (!val) return;
+      const cat = customCatSelect?.value || 'frontend';
+      const { list, key } = getTargetList(cat);
+
+      if (!list.some(item => item.toLowerCase() === val.toLowerCase())) {
+        list.push(val);
+        this.updateData({ [key]: [...list] });
+        if (customInput) customInput.value = '';
+        this.render(this.store.getState());
+      }
+    };
+
+    addCustomBtn?.addEventListener('click', handleAddCustom);
+    customInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleAddCustom();
+      }
+    });
+
+    // 6. Manual inputs sync
+    document.getElementById('tech-langs')?.addEventListener('input', (e) => this.updateData({ languages: parseList(e.target.value) }));
+    document.getElementById('tech-frameworks')?.addEventListener('input', (e) => this.updateData({ frameworks: parseList(e.target.value) }));
+    document.getElementById('tech-dbs')?.addEventListener('input', (e) => this.updateData({ databases: parseList(e.target.value) }));
+    document.getElementById('tech-tools')?.addEventListener('input', (e) => this.updateData({ tools: parseList(e.target.value) }));
   }
 
   renderPinnedReposForm(data) {

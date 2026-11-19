@@ -4,6 +4,8 @@
  * Framework-agnostic: zero DOM dependency, usable in both browser and Node.js.
  */
 
+import { findSkill } from './skills-catalog.js';
+
 /**
  * Escapes characters that could break markdown formatting where plain text is expected
  * @param {string} str
@@ -149,11 +151,36 @@ function renderTechStack(data) {
 
   const lines = ['## Tech Stack', ''];
 
-  if (style === 'badges') {
+  if (style === 'icons') {
+    // Vector Icons layout (similar to Rahul Jain / Devicon grid)
+    const makeIcon = (tech) => {
+      const clean = tech.trim();
+      const meta = findSkill(clean);
+      const iconUrl = meta?.icon || `https://raw.githubusercontent.com/devicons/devicon/master/icons/${clean.toLowerCase()}/${clean.toLowerCase()}-original.svg`;
+      return `<img src="${iconUrl}" alt="${clean}" width="38" height="38"/>`;
+    };
+
+    const renderGroup = (label, items) => {
+      if (items.length === 0) return;
+      lines.push(`**${label}**`);
+      lines.push('<p align="left">');
+      lines.push(items.map(makeIcon).join(' '));
+      lines.push('</p>');
+      lines.push('');
+    };
+
+    renderGroup('Languages:', languages);
+    renderGroup('Frameworks & Libraries:', frameworks);
+    renderGroup('Databases & Storage:', databases);
+    renderGroup('Tools & DevOps:', tools);
+
+  } else if (style === 'badges') {
     const makeBadge = (tech) => {
       const clean = tech.trim();
+      const meta = findSkill(clean);
+      const color = meta?.color || '21262d';
       const encoded = encodeURIComponent(clean).replace(/-/g, '--');
-      return `![${clean}](https://img.shields.io/badge/-${encoded}-21262d?style=${badgeTheme}&logo=${encodeURIComponent(clean.toLowerCase())}&logoColor=white)`;
+      return `![${clean}](https://img.shields.io/badge/-${encoded}-${color}?style=${badgeTheme}&logo=${encodeURIComponent(clean.toLowerCase())}&logoColor=white)`;
     };
 
     if (languages.length > 0) {

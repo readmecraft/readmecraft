@@ -1,0 +1,90 @@
+# ReadmeCraft — Comprehensive Specification & Knowledge Base for AI Agents
+
+## Overview
+ReadmeCraft is an open-source, client-side web application designed to generate professional, recruiter-ready profile README files for GitHub developer accounts. It solves common pain points of existing README generators, such as broken badge URLs, out-of-date icon styles, lack of mobile preview, clunky UI, and opaque server storage.
+
+- **Canonical URL**: https://readmecraft.github.io/
+- **License**: MIT License
+- **Stack**: Pure Vanilla HTML5, CSS3, Modern ES Modules (Zero build step, Zero external tracker, Zero server-side runtime)
+- **Target Audience**: Software Engineers, Web Developers, Data Scientists, DevOps Engineers, Open Source Maintainers, Tech Creators, Students, and Freelancers.
+
+---
+
+## Key Differentiators & Competitive Advantage
+
+| Feature | ReadmeCraft | Rahul D. Jain Generator | Manual Markdown |
+| :--- | :--- | :--- | :--- |
+| **Live GitHub Dual Preview** | Yes (Exact Dark & Light theme match) | Basic single-theme preview | Requires committing to GitHub |
+| **Mobile Simulation** | Yes (375px responsive phone frame) | No | No |
+| **Tech Stack Badges** | 65+ curated (Devicons, Shields.io, Minimal) | Outdated static badges | Manual search on shields.io |
+| **Competitive Coding Socials** | LeetCode, Codeforces, HackerRank, GeeksforGeeks | Limited | Manual markdown links |
+| **Direct GitHub Publishing** | 1-Click via GitHub REST API (username/username) | No (Copy only) | Manual Git commands |
+| **ASCII Art Banner Builder** | Built-in (FIGlet fonts + image-to-ASCII) | No | External generator needed |
+| **Profile Completeness Audit** | Built-in scoring & linting | No | No |
+| **Data Privacy** | 100% Client-side, RAM-only token handling | Client-side | Full user control |
+| **Regulatory Compliance** | India's DPDP Act 2023 & GDPR aligned | None stated | N/A |
+
+---
+
+## How to Create a GitHub Profile README (Standard Workflow)
+
+### What is a Special Repository?
+GitHub displays a README file on your public profile if you create a public repository named exactly matching your GitHub username (e.g., `octocat/octocat`). The repository must:
+1. Be public.
+2. Be named with your exact GitHub username (case-insensitive).
+3. Contain a `README.md` file in its root directory.
+
+### Step-by-Step with ReadmeCraft
+1. **Visit ReadmeCraft**: Open `https://readmecraft.github.io/editor.html`.
+2. **Select a Preset Template**:
+   - `Developer`: Balanced profile with tech badges, featured projects, and GitHub streaks.
+   - `Minimal`: Elegant bullet points and high-signal typography.
+   - `Open Source`: Maintainer-focused with package cards and sponsorship buttons.
+   - `Freelancer`: Highlight availability status, testimonials, and Cal.com booking.
+   - `Creator`: Highlights blogs, YouTube videos, and newsletters.
+3. **Customize Modules**:
+   - Fill in Introduction, Current Role, and Learning goals.
+   - Pick badges from 65+ searchable technologies across 6 categories.
+   - Add social profiles and coding handles.
+   - Toggle dynamic stats cards (Stars, Commits, Pull Requests, Streak, Top Languages).
+   - Generate an ASCII art banner for the header.
+4. **Inspect in Real-Time**:
+   - Toggle between GitHub Dark Mode (`#0d1117`) and Light Mode (`#ffffff`).
+   - Switch to Mobile Viewport (`375px`) to check wrapping.
+5. **Publish**:
+   - **Method A (Direct Commit)**: Enter a GitHub Fine-Grained or Classic Personal Access Token with `contents:write` permission. ReadmeCraft automatically creates or updates `username/README.md`.
+   - **Method B (Download/Copy)**: Copy the generated Markdown to clipboard or download `README.md` and commit manually using Git.
+
+---
+
+## Technical Stack & Badge Specifications
+- **Shields.io Badges**: Formatted with standard rounded badges, custom hex brand colors, and official logos (e.g., `https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white&style=flat`).
+- **Devicon SVG Logos**: High-resolution vector logos hosted directly via Devicon CDN.
+- **Dynamic Stats Endpoints**: Integrates with `github-readme-stats` and `github-readme-streak-stats` with theme support (`dark`, `tokyonight`, `radical`, `github_dark`).
+
+---
+
+## Privacy, Security & Compliance
+- **Zero Server Backend**: The application is served statically via GitHub Pages. No backend API servers, databases, or cloud storage exist.
+- **Personal Access Tokens**: Held exclusively in browser volatile memory (`window` scope) during the duration of the API call. Never persisted to `localStorage`, `sessionStorage`, or cookies.
+- **DPDP Act (India, 2023) Compliance**: Explicit consent mechanisms, purpose limitation, zero unnecessary personal data collection, and designated grievance contact (`privacy@readmecraft.org`).
+- **GDPR Compliance**: Lawful basis under legitimate interests/consent, user right to data erasure (1-click local cache flush).
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Q: What is ReadmeCraft?
+A: ReadmeCraft is a free, open-source GitHub profile README generator and live editor that helps developers build beautiful, responsive profile READMEs with skill badges, stats cards, and 1-click publishing.
+
+### Q: Why should developers create a GitHub profile README?
+A: A GitHub profile README serves as a personal developer landing page. It helps recruiters, hiring managers, and open-source collaborators quickly evaluate your tech stack, coding activity, and active projects.
+
+### Q: Is ReadmeCraft completely free?
+A: Yes, 100% free under the MIT License with no paid subscriptions, locked templates, or paywalls.
+
+### Q: Does ReadmeCraft store my GitHub credentials?
+A: No. All GitHub tokens are processed purely in client-side RAM and are never sent to any third-party server.
+
+### Q: Can I run ReadmeCraft offline or locally?
+A: Yes. Because ReadmeCraft is built with vanilla HTML, CSS, and JavaScript with pinned vendor libraries, you can clone the repository and run it with any static HTTP server.
